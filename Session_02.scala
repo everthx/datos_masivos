@@ -5,7 +5,16 @@ val a=17.27
 val radio= a/(2*3.1416)
 
 //2. Desarrollar un algoritmo en scala que me diga si un numero es primo
-    
+
+def numero_primo(n :Int) : Boolean = {
+    if (n <= 1)
+    false
+    else if (n==2)
+    true
+    else
+    !(2 to (n-1)).exists(x=> n % x==0)
+}
+// numero_primo(6)
 
 //3. Dada la variable bird = "tweet", utiliza interpolacion de string para
 //   imprimir "Estoy ecribiendo un tweet"
