@@ -20,7 +20,7 @@ var mensaje = "Hola Luke yo soy tu padre!"
 mensaje.slice(5,9)
 
 //5. Cual es la diferencia entre value y una variable en scala?
-//la diferencia es que variable se puede modificar (es mutable) y value es inmutable, que no se puede modificar
+
 val valor = "Valor inmutabe/no puede ser modificado"
 var variable = "Variable mutable/si puede ser modificada"
 
