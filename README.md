@@ -1,3 +1,14 @@
-README file from development Branch
+Instituto Nacional de México
+Instituto Tecnológico de Tijuana
+Departamento de sistemas y computación
 
-dev:30-10-20- Commit by Fernando Luna Fuentes 162210975 
+Ingeniería informática
+Semestre Ago - Dic 2020
+
+Datos Masivos
+BDD-1704 IF9A
+
+Equipo:
+Hernandez Negrete Salma Fabel - 16212354
+Luna Fuentes Fernando -
+
