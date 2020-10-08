@@ -14,6 +14,10 @@ def numero_primo(n :Int) : Boolean = {
     else
     !(2 to (n-1)).exists(x=> n % x==0)
 }
+def isPrime1(n: Int): Boolean = ! ((2 until n-1) exists (n % _ == 0))
+
+(1 to 10).foreach(i => if (numero_primo(i)) println("%d is prime.".format(i)))
+
 // numero_primo(6)
 
 //3. Dada la variable bird = "tweet", utiliza interpolacion de string para
