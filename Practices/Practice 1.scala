@@ -22,7 +22,7 @@ def numero_primo(n: Int): Boolean = ! ((2 until n-1) exists (n % _ == 0))
 //   imprimir "Estoy ecribiendo un tweet"
 
 var bird = "tweet"
-println ("Estoy ecribiendo un " + bird)
+println ("Estoy escribiendo un " + bird)
 
 //4. Dada la variable mensaje = "Hola Luke yo soy tu padre!" utiliza slilce para extraer la
 //   secuencia "Luke"
