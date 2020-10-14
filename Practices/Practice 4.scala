@@ -29,6 +29,20 @@ return (j)
 //res14: Double = 89.27414595449586
 
 //Algorithm 3
+def fibonacci3(n: Int){
+    var a:Int =0
+    var b:Int =1
+    var c:Int =0
+
+    for(k:Int <- Range(0,n))
+    {
+        c = b + a 
+        a=b
+        b=c
+
+        print(s"$a ")
+    }
+}
 
 //Algorithm 4
 
