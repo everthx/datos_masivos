@@ -16,6 +16,17 @@ return fibonacci (n-1) + fibonacci (n-2)
 
 
 //Algorithm 2
+def fibonacci(n: Double): Double = {
+if(n<2){
+return n
+}
+else{
+var varphi = ((1+sqrt(5))/2)
+var j=((math.pow(varphi,n))-(1-varphi))/sqrt(5)
+return (j) 
+}
+}//scala> fibonacci(11)
+//res14: Double = 89.27414595449586
 
 //Algorithm 3
 
