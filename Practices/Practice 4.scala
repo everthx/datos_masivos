@@ -45,5 +45,18 @@ def fibonacci3(n: Int){
 }
 
 //Algorithm 4
+def fibonacci4(n: Int){
+    var a:Int =0
+    var b:Int =1
+
+    for(k:Int <- Range(0,n))
+    {
+        b = b + a
+        a = b - a
+
+        print(s"$a ")
+    }
+}
+
 
 //Algorithm 5
