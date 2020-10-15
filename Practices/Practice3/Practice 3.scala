@@ -1,10 +1,5 @@
-// def isEven(num:Int): Boolean = {
-//     return num%2 == 0
-// }
-// def isEven(num:Int): num%2 == 0
-// println(isEven(6))
-// println(isEven(3))
-// Practice 3, analyse the following code with your own words
+// Practice 3
+// Analyse the following code with your own words
 
 def listEvens(list:List[Int]): String ={
     for(n <- list){
