@@ -37,7 +37,7 @@ listEvens(l2)
 // ANALYSIS # 2
 // This code deals with a list of numbers that when one is 7 will add 14 instead of 7 and if it is another
 // number other than 7 will add the value of that number.
-// First the "lucky" function that will make a list of integers is declared, the variable "res" is declared
+// First the "afortunado" function that will make a list of integers is declared, the variable "res" is declared
 // that will carry the sum, then there is the "for" loop so that each number in the list enters, at the end is the conditional
 // if it is the number equal to 7 then it will be the sum plus 14, if not it will be the sum plus the number from the list and at the end of the
 // loop returns "res".
@@ -60,7 +60,13 @@ println(afortunado(af))
 //scala> println(afortunado(af))
 //29
 
-//ANALISIS 3
+// ANALYSIS 3
+// In this code it is observed if there is a balance in the sum of the numbers in the list.
+// First the "balance" function is declared where the list will enter and return the boolean value, they are declared
+// the primera and segunda variables that start with "0", where "segunda" is the sum of the values ​​in the list
+// then there is the "for" loop that what it does is that in the first variable add the value of the list plus the position it is in
+// the counter of the "for" cycle and in the second the sum of the entire list is subtracted from the number of the list, then there is the conditional
+// that compares the result of both variables, if they are the same, it shows "true", if it isn't, it exits the "for" loop and shows "false".
 
 def balance(list:List[Int]): Boolean={
     var primera = 0
@@ -83,18 +89,23 @@ val bl = List(3,2,1)
 val bl2 = List(2,3,3,2)
 val bl3 = List(10,30,90)
 
-balance(bl)
-balance(bl2)
-balance(bl3)
-//ANALISIS 4
+balance(bl)//res5: Boolean = true
+balance(bl2)//res6: Boolean = true
+balance(bl3)//res7: Boolean = false
+
+// ANALYSIS 4
+// This code returns true or false if the word is a palindrome.
+// First define the "palindromo" function that will enter the word and return boolean,
+// then analyze the word with the "reverse" function, checking if the word entered is the same
+// to the word that is formed backwards.
 def palindromo(palabra:String):Boolean ={
     return (palabra == palabra.reverse)
 }
-
+// declaration of variables
 val palabra = "OSO"
 val palabra2 = "ANNA"
 val palabra3 = "JUAN"
 
-println(palindromo(palabra))
-println(palindromo(palabra2))
-println(palindromo(palabra3))
+println(palindromo(palabra))//true
+println(palindromo(palabra2))//true
+println(palindromo(palabra3))//false
