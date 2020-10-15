@@ -3,8 +3,9 @@
 
 In the present practice, an analysis of the following codes was carried out:
 
->**Analisys # 1**
->In the present code we try to see which are the odd numbers and which are the pairs of two lists.
+>**Analisys # 1 :**<
+>In the present code we try to see which are the odd numbers and which are the pairs of two lists.<
+
 The "listEvens" function is declared where the list will be entered, then there is "for" since it is a string of numbers that has what to enter to say which are pairs and which are not, then inside the "for" is the conditional, if the number is the residual of the division is 0 then it is odd, if not then it is even.
 ```scala
 def listEvens(list:List[Int]): String ={
