@@ -5,7 +5,7 @@ In this practice, 5 fibonacci algorithms were performed in scala, they were obta
 
 https://es.wikipedia.org/wiki/Sucesi%C3%B3n_de_Fibonacci
 
->**1st Algorithm : ** Descending recursive version
+>**1st Algorithm :** Descending recursive version
 
 In the first algorithm the variable is defined which will be an integer type, then there is the conditional which if the number that was defined is less than 2 then the number is returned and if it is greater than 2 then it adds until the result is found.
 
@@ -21,7 +21,7 @@ def fibonacci(n: Int): BigInt = {
         }//scala> fibonacci(10) 
  //res8: BigInt = 55
 ```
->**2nd Algorithm: ** Version with explicit formula
+>**2nd Algorithm:** Version with explicit formula
 
 In this algorithm it is almost the same as the first one but instead of adding what it does is that it is done with its formula, the first one is varphi that its value is 1.618033988749895, then it goes to the following formula and returns the result with the rounding function and return an integer.
 
