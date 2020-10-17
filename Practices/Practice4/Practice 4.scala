@@ -60,13 +60,11 @@ def fibonacci4(n: Int){
     }
 }//scala> fibonacci3(5)
 
-
 //Algorithm 5
-def fibonacci(n: Int): BigInt =
-{
+def fibonacci(n: Int) = {
     if (n<2)
     {
-        return n
+     println(n)
     }
     else
     {
@@ -77,7 +75,7 @@ def fibonacci(n: Int): BigInt =
         {
             vector(k) = vector(k-1) + vector(k-2)
         }
-        return  Math.round(vector(n))
+         println(vector.mkString(" "))
     }
-}//scala> fibonacci(10)
-//res43: BigInt = 55
+}//fibonacci(11)
+//0 1 1 2 3 5 8 13 21 34 55 89
