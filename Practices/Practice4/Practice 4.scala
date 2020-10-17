@@ -1,10 +1,7 @@
 //Practice 4: Implement Fibonacci Series
 
 //1st Algorithm
-import scala.math.sqrt
-
-def fibonacci(n: Int): BigInt =
-{
+def fibonacci(n: Int): BigInt = {
     if(n<2)
     {
         return n
@@ -18,19 +15,20 @@ def fibonacci(n: Int): BigInt =
 
 
 //2nd Algorithm
-def fibonacci(n: Double): Double = {
+import scala.math.sqrt
+def fibonacci(n: Int): BigInt = {
     if(n<2)
     {
         return n
     }
     else
     {
-        var varphi = ((1+sqrt(5))/2)
+        var varphi = (1+sqrt(5))/2
         var j=((math.pow(varphi,n))-(1-varphi))/sqrt(5)
-        return (j) 
+        return Math.round(j) 
     }
     }//scala> fibonacci(11)
-    //res14: Double = 89.27414595449586
+    //res14: BigInt = 89
 
 //3rd Algorithm 3
 def fibonacci3(n: Int){
@@ -64,3 +62,22 @@ def fibonacci4(n: Int){
 
 
 //Algorithm 5
+def fibonacci(n: Int): BigInt =
+{
+    if (n<2)
+    {
+        return n
+    }
+    else
+    {
+        val vector = Array.range(0, n+1)
+        vector (0) = 0
+        vector (1) = 1
+        for (k <- 2 to n)
+        {
+            vector(k) = vector(k-1) + vector(k-2)
+        }
+        return  Math.round(vector(n))
+    }
+}//scala> fibonacci(10)
+//res43: BigInt = 55
