@@ -14,7 +14,8 @@
     ("Jeff","Marketing","CA",80000,25,18000),
     ("Kumar","Marketing","NY",91000,50,21000)
   )
-   val df = simpleData.toDF("employee_name","department","state","salary","age","bonus")
+  val df = simpleData.toDF("employee_name","department","state","salary","age","bonus")
+
   df.show()
 //No.1
 
@@ -25,4 +26,5 @@ df.orderBy("department","state").show(false)
 df.sort(col("department").asc,col("state").desc).show(false)
 
 //No.3
+
 
