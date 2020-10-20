@@ -16,15 +16,42 @@
   )
   val df = simpleData.toDF("employee_name","department","state","salary","age","bonus")
 
-  df.show()
 //No.1
-
-df.orderBy("department","state").show(false)
+  df.show()
 
 //No.2
-
-df.sort(col("department").asc,col("state").desc).show(false)
+df.orderBy("department","state").show(false)
 
 //No.3
+df.sort(col("department").asc,col("state").desc).show(false)
 
+//No.4 - We can group our dataframe by a header and get the mean from it
+df.groupBy("department").mean().show()
 
+//No.5 - Once grouped, we cna even count how many departments we have in this column
+df.groupBy("department").count().show()
+
+//No.6 - Using .max() we can met the Maximum numbers expressed within the groupd data
+df.groupBy("department").max().show()
+
+//No.7 - Same las the last command, we could even get the minimum numbers from the group.
+df.groupBy("department").min().show()
+
+//No.8 - A quick way to sum all values in a column is to use .sum(), in this example we
+//try to sum the salary
+df.groupBy("salary").sum().show()
+
+//No.9 - with select, we could filter how many different number we have with
+df.select(countDistinct("salary")).show()
+
+//No.10 - 
+
+//No.11
+
+//No.12
+
+//No.13
+
+//No.14
+
+//No.15
