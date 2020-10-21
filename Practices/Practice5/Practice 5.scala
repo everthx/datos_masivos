@@ -16,13 +16,13 @@
   )
   val df = simpleData.toDF("employee_name","department","state","salary","age","bonus")
 
-//No.1
+//No.1 - We can show our dataframe
   df.show()
 
-//No.2
+//No.2 - We can show specific columns from our datafrma without tem having to truncate
 df.orderBy("department","state").show(false)
 
-//No.3
+//No.3 - We can sorty by 2 columns too
 df.sort(col("department").asc,col("state").desc).show(false)
 
 //No.4 - We can group our dataframe by a header and get the mean from it
@@ -41,17 +41,42 @@ df.groupBy("department").min().show()
 //try to sum the salary
 df.groupBy("salary").sum().show()
 
-//No.9 - with select, we could filter how many different number we have with
+//No.9 - This dataframe has a "salary" and "bonus" column, we can create a new dataframe with a new
+//column for the sum of "salary" and "bonus" as "totalAmount" like this
+val newdf = df.withColumn("totalAmount",df("salary")+df("bonus"))
+
+//No.10 - We can even use logical operators, say we want to filter by employees over 30 years old
+df.filter("age > 30").show
+//Or even filter by a a specific range 
+df.filter($"age" > 30 && $"age" < 40).show
+
+//No.11 - We can perform operations on datasets such as selecting every employee and increasing their age by one
+df.select($"employee_name", $"age" + 1).show()
+
+//No.12 - with select, we could filter how many different number we have with
 df.select(countDistinct("salary")).show()
 
-//No.10 - 
 
-//No.11
+//No.13 - We can also create a dataframe by loading data from a CSV file, for thi example, we will be
+//loading data from a file named CitiGroup2006_2008.csv
+val df2 = spark.read.option("header", "true").option("inferSchema","true")csv("CitiGroup2006_2008") //Finantial Crisis
 
-//No.12
+//No.14 - We can use a function to remove duplicates (row based)
+df2.dropDuplicates().show()
 
-//No.13
+//No.15 - We can even work on several dataframes at the same time, say we have the following 2 datasets
+val dataframeA = Seq(
+    (3,"Tijuana", "Salma",664123, 45000,"DEV"),
+    (1,"Ensenada","Fernando",646123, 50000,"IT")
+).toDF("emp_id","emp_city","emp_name","emp_phone","emp_sal","emp_department")
 
-//No.14
+val dataframeB = Seq(
+    (3,"Tijuana", "Salma",664123, 45000,"DEV"),
+    (1,"Sydney","Fernando",646123, 48000,"IT")
+).toDF("emp_id","emp_city","emp_name","emp_phone","emp_sal","emp_department")
 
-//No.15
+// and we only want to observe de data that is contained in dataframeA that is not contained in dataframeB
+dataframeA.except(dataframeB).show()
+
+//No.16 - In a very similary way, we could only get data in common from 2 datasets
+val intersectValues = dataframeA.intersect(dataframeB)
