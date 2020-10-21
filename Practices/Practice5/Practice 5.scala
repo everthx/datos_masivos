@@ -22,7 +22,9 @@
 //No.2 - We can show specific columns from our datafrma without tem having to truncate
 df.orderBy("department","state").show(false)
 
-//No.3 - We can sorty by 2 columns too
+//No.3 - We can sort values by columns in our dataframe with .sort().
+//The .sort() function has additional functions we can call as parameters 
+//as it is shown bellow.
 df.sort(col("department").asc,col("state").desc).show(false)
 
 //No.4 - We can group our dataframe by a header and get the mean from it
