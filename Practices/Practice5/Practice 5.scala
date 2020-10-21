@@ -61,7 +61,7 @@ df.select(countDistinct("salary")).show()
 
 //No.13 - We can also create a dataframe by loading data from a CSV file, for thi example, we will be
 //loading data from a file named CitiGroup2006_2008.csv
-val df2 = spark.read.option("header", "true").option("inferSchema","true")csv("CitiGroup2006_2008") //Finantial Crisis
+val df2 = spark.read.option("header", "true").option("inferSchema","true")csv("CitiGroup2006_2008")
 
 //No.14 - We can use a function to remove duplicates (row based)
 df2.dropDuplicates().show()

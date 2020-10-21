@@ -6,6 +6,7 @@ README file from Unit_1 Branch
 >in Dataframes.
 
 >**Our solution was the following:**
+
 We first must import the needed library and load the data on to a variable that will become our dataframe:
 ```scala
  import spark.implicits._
