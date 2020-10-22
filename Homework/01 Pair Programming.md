@@ -14,5 +14,5 @@ Para que este método funcione, se debe contar con soluciones técnicas especial
 >Está técnica de ping-pong programming puede ser usada de forma pedagógica para principiantes o por desarrolladores más experimentados de la siguiente forma:
 
 >- **Principiante:** Le permite participar como navegador e intervenir de forma apropiada en el desarrollo de algún software. También le permite participar como conductor y explicar su código mientras lo escribe.
-- **Intermedio:** Le permite decidir en qué momento cambiar de rol. Sabe qué momento es bueno para tomar control del teclado de nuevo.
-- **Avanzado:** Le permite integrarse a lo que otro par ha estado trabajando y tomar la posición de navegador de forma más eficiente.
+>- **Intermedio:** Le permite decidir en qué momento cambiar de rol. Sabe qué momento es bueno para tomar control del teclado de nuevo.
+>- **Avanzado:** Le permite integrarse a lo que otro par ha estado trabajando y tomar la posición de navegador de forma más eficiente.
