@@ -1,5 +1,3 @@
-README file from Unit_1 Branch
-
 # Practice 1
 
 >In this practice the goal was to code in Scala an 

@@ -1,4 +1,3 @@
-
 # Practice 3
 
 In the current practice, an analysis of the following codes was carried out:

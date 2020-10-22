@@ -1,4 +1,3 @@
-
 # Practice 4
 
 In this practice, 5 fibonacci algorithms were performed in Scala, they were obtained from the following page:

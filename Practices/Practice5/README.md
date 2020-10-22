@@ -1,5 +1,3 @@
-README file from Unit_1 Branch
-
 # Practice 5
 
 >For this practice, we are to try out 15 predetermined functions in Spark used 

@@ -1,5 +1,3 @@
-README file from Unit_1 Branch
-
 # Practice 2
 
 >In this practice the goal was to create a list 
