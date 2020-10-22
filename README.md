@@ -1,15 +1,16 @@
-Instituto Nacional de México
-Instituto Tecnológico de Tijuana
-Departamento de sistemas y computación
+#### Instituto Nacional de México
+#### Instituto Tecnológico de Tijuana
+#### Departamento de sistemas y computación
 
-Ingeniería informática
-Semestre Ago - Dic 2020
+####  Ingeniería informática
+####  Semestre Sep - Ene 2020
 
-Datos Masivos
-BDD-1704 IF9A
+####  Datos Masivos | BDD-1704 IF9A
+####  Docente: Jose Christian Romero Hernandez
 
-Equipo:
-Hernandez Negrete Salma Fabel - 16212354
+####  Repositorio
 
-Luna Fuentes Fernando - 16210975
+#### Equipo:
+#### Hernandez Negrete Salma Fabel - 16212354
+#### Luna Fuentes Fernando - 16210975
 
