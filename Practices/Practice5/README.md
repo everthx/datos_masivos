@@ -31,7 +31,7 @@ From there we can simplify the data by filtering what we want and storing it in 
   df.show()
 ```
 
->No.2- We can show specific columns from our datafrma without tem having 
+>No.2- We can show specific columns from our dataframe without them having 
 >to truncate .orderBy() and .show(false)
 ```scala
 df.orderBy("department","state").show(false)
@@ -43,17 +43,18 @@ df.orderBy("department","state").show(false)
 ```scala
 df.sort(col("department").asc,col("state").desc).show(false)
 ```
->No.4 - We can group our dataframe by a header and get the mean from it
+
+>No.4 - We can group our dataframe by a header and get the mean from it.
 ```sacala
 df.groupBy("department").mean().show()
 ```
 
->No.5 - Once grouped, we cna even count how many departments we have in this column
+>No.5 - Once grouped, we can even count how many departments we have in this column.
 ```scala
 df.groupBy("department").count().show()
 ```
 
->No.6 - Using .max() we can met the Maximum numbers expressed within the groupd data
+>No.6 - Using .max() we can get the Maximum numbers expressed within the groupd data
 ```scala
 df.groupBy("department").max().show()
 ```
@@ -64,12 +65,12 @@ df.groupBy("department").min().show()
 ```
 
 >No.8 - A quick way to sum all values in a column is to use .sum(), in this example we
->try to sum the salary
+>try to sum the salary.
 ```scala
 df.groupBy("salary").sum().show()
-```scala
+```
 
->No.9 - This dataframe has a "salary" and "bonus" column, we can create a new >dataframe with a new column for the sum of "salary" and "bonus" as "totalAmount" like >this
+>No.9 - This dataframe has a "salary" and "bonus" column, we can create a new >dataframe with a new column for the sum of "salary" and "bonus" as "totalAmount" like >this.
 ```scala
 val newdf = df.withColumn("totalAmount",df("salary")+df("bonus"))
 ```
@@ -78,6 +79,7 @@ val newdf = df.withColumn("totalAmount",df("salary")+df("bonus"))
 ```scala
 df.filter("age > 30").show
 ```
+
 >Or even filter by a a specific range
 ```scala
 df.filter($"age" > 30 && $"age" < 40).show
@@ -115,12 +117,12 @@ val dataframeB = Seq(
     (1,"Sydney","Fernando",646123, 48000,"IT")
 ).toDF("emp_id","emp_city","emp_name","emp_phone","emp_sal","emp_department")
 ```
->And we only want to observe de data that is contained in dataframeA that is not >contained in dataframeB
+>And we only want to observe the data that is contained in dataframeA but is not >contained in dataframeB
 ```scala
 dataframeA.except(dataframeB).show()
 ```
 
->No.16 - In a very similary way, we could only get data in common from 2 datasets
+>No.16 - In a very similar way, we could only get data in common from 2 datasets
 ```scala
 val intersectValues = dataframeA.intersect(dataframeB)
 ```

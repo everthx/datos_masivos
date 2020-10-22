@@ -1,5 +1,5 @@
 //Practice 5
-//Practice with 15 Spark Default Functions for Dataframes, with the link referring to this topic
+//Practice with 15 of Spark's Default Functions for Dataframes, with the link referring to this topic.
 
  import spark.implicits._
 
@@ -19,7 +19,7 @@
 //No.1 - We can show our dataframe
   df.show()
 
-//No.2 - We can show specific columns from our datafrma without tem having to truncate
+//No.2 - We can show specific columns from our dataframe without them having to truncate.
 df.orderBy("department","state").show(false)
 
 //No.3 - We can sort values by columns in our dataframe with .sort().
@@ -27,24 +27,24 @@ df.orderBy("department","state").show(false)
 //as it is shown bellow.
 df.sort(col("department").asc,col("state").desc).show(false)
 
-//No.4 - We can group our dataframe by a header and get the mean from it
+//No.4 - We can group our dataframe by a header and get the mean from it.
 df.groupBy("department").mean().show()
 
-//No.5 - Once grouped, we cna even count how many departments we have in this column
+//No.5 - Once grouped, we can even count how many departments we have in this column.
 df.groupBy("department").count().show()
 
-//No.6 - Using .max() we can met the Maximum numbers expressed within the groupd data
+//No.6 - Using .max() we can get the Maximum numbers expressed within the grouped data
 df.groupBy("department").max().show()
 
 //No.7 - Same las the last command, we could even get the minimum numbers from the group.
 df.groupBy("department").min().show()
 
 //No.8 - A quick way to sum all values in a column is to use .sum(), in this example we
-//try to sum the salary
+//try to sum the salary.
 df.groupBy("salary").sum().show()
 
 //No.9 - This dataframe has a "salary" and "bonus" column, we can create a new dataframe with a new
-//column for the sum of "salary" and "bonus" as "totalAmount" like this
+//column for the sum of "salary" and "bonus" as "totalAmount" like this.
 val newdf = df.withColumn("totalAmount",df("salary")+df("bonus"))
 
 //No.10 - We can even use logical operators, say we want to filter by employees over 30 years old
@@ -55,15 +55,15 @@ df.filter($"age" > 30 && $"age" < 40).show
 //No.11 - We can perform operations on datasets such as selecting every employee and increasing their age by one
 df.select($"employee_name", $"age" + 1).show()
 
-//No.12 - with select, we could filter how many different number we have with
+//No.12 - With countDistinct, we could filter how many different numbers we have within our selection.
 df.select(countDistinct("salary")).show()
 
 
-//No.13 - We can also create a dataframe by loading data from a CSV file, for thi example, we will be
+//No.13 - We can also create a dataframe by loading data from a CSV file, for this example, we'll be
 //loading data from a file named CitiGroup2006_2008.csv
 val df2 = spark.read.option("header", "true").option("inferSchema","true")csv("CitiGroup2006_2008")
 
-//No.14 - We can use a function to remove duplicates (row based)
+//No.14 - We can use a function to remove duplicates (row based).
 df2.dropDuplicates().show()
 
 //No.15 - We can even work on several dataframes at the same time, say we have the following 2 datasets
@@ -77,8 +77,8 @@ val dataframeB = Seq(
     (1,"Sydney","Fernando",646123, 48000,"IT")
 ).toDF("emp_id","emp_city","emp_name","emp_phone","emp_sal","emp_department")
 
-// and we only want to observe de data that is contained in dataframeA that is not contained in dataframeB
+// and we only want to observe the data that is contained in dataframeA but is not contained in dataframeB
 dataframeA.except(dataframeB).show()
 
-//No.16 - In a very similary way, we could only get data in common from 2 datasets
+//No.16 - In a very similar way, we could only get data in common from 2 datasets
 val intersectValues = dataframeA.intersect(dataframeB)
