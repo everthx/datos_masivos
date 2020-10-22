@@ -16,5 +16,5 @@
 > * [PRACTICE 4](https://github.com/everthx/datos_masivos/blob/Unit_1/Practices/Practice4/README.md)
 > * [PRACTICE 5](https://github.com/everthx/datos_masivos/blob/Unit_1/Practices/Practice5/README.md)
 ### Homework Assignments
-> * [PAIR CODING]()
-> * [PEARSON'S CORRELATION]()
+> * [PAIR CODING](https://github.com/everthx/datos_masivos/blob/Unit_1/Homework/01%20Pair%20Programming.md)
+> * [PEARSON'S CORRELATION](https://github.com/everthx/datos_masivos/blob/Unit_1/Homework/02%20Pearson's%20Correlation.md)
