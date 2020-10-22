@@ -1,5 +1,5 @@
 # Big Data:
-**By someone**
+**By Hernandez Negrete Salma Fabel - 16212354 & Luna Fuentes Fernando 16210975**
 
 ## Unit 1 Overview
 
