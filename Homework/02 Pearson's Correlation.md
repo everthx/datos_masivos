@@ -10,7 +10,7 @@ Si la asociación entre los elementos no es lineal, entonces el coeficiente no s
 >- La asociación debe ser lineal.
 >- No debe haber valores atípicos en los datos.
 
-Cuando la relación de Pearson es aplicada a la población, comúnmente es representada por la letra griega rho (𝙥) y se le puede referir como el coeficiente de correlación de la población de Pearson. 
+>Cuando la relación de Pearson es aplicada a la población, comúnmente es representada por la letra griega rho (𝙥) y se le puede referir como el coeficiente de correlación de la población de Pearson. 
 Dado un par de variables aleatorias (X,Y), la fórmula se puede representar de la siguiente forma:
 
 ![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/formula-correlaci%C3%B3n.png)
