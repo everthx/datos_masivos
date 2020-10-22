@@ -62,13 +62,13 @@ Como prueba de que se realizó de manera correcta, si nos vamos a github donde e
 
 ![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/UsoSSH.PNG)
 
-####Creación del repositorio “pratica_git_flow”
+#### Creación del repositorio “pratica_git_flow”
 
 En esta parte de la práctica se crea el repositorio.
 
 ![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/RepositorioGitflow.PNG)
 
-####Clonar repositorio en la PC
+#### Clonar repositorio en la PC
 
 ```
 salmi@HENSF2 MINGW64 ~/OneDrive/Documentos/GitHub
@@ -81,7 +81,7 @@ Visualización del repositorio clonado.
 
 ![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/ClonarRepositorio.PNG)
 
-####Rama (branch) development 
+#### Rama (branch) development 
 
 Una vez que tenemos el repositorio clonado lo que sigue es crear las ramas con “git branch” podemos saber en qué rama nos encontramos, en este caso es la “master” que está por default.
 
@@ -102,7 +102,7 @@ $ git checkout -b development
 
 Se modifica el README.md
 
-####Commit en la rama development
+#### Commit en la rama development
 
 ```
 salmi@HENSF2 MINGW64 ~/OneDrive/Documentos/GitHub/pratica_git_flow (development)
@@ -137,7 +137,7 @@ Visualización de la modificación de la rama development
 
 ![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/RamaDevelopment.PNG)
 
-####Rama (branch) features
+#### Rama (branch) features
 
 ```
 salmi@HENSF2 MINGW64 ~/OneDrive/Documentos/GitHub/pratica_git_flow (development)
