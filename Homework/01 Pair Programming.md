@@ -1,18 +1,18 @@
 # Pair Programming
 
->La Programación en Pareja, requiere que dos programadores participen en un esfuerzo combinado de desarrollo en un sitio de trabajo. 
-Cada miembro realiza una acción que el otro no está haciendo actualmente: Mientras que uno codifica las pruebas de unidades el otro piensa en la clase que satisfará la prueba, por ejemplo.
+>Pair programming requires that 2 programmers participate in a combined effort of development in a worksite.
+Each member does an action that the other is not doing at the moment: While one codes the unit tests the other thinks of the implementation to pass the test, for example.
 
->La persona que está haciendo la codificación se le da el nombre de controlador mientras que a la persona que está dirigiendo se le llama el navegador. 
-Se sugiere a menudo para que los dos socios cambien de papeles por lo menos cada media hora o después de que se haga una prueba de unidad.
+>The person who is coding receives the name of "Controller"  while the other one directing the activity receives the name of "Navigator".
+It is suggested that both parties change their roles at least every half an hour or after each unit test.
 
->Está técnica ha sido bastante adoptada para los equipos que se basan en metodologías de trabajo agile, pero parece que la técnica ha sido usada mucho antes del movimiento Agile. 
+>This practice has been very well adopted by teams based on Agile workflow but seems this technique has been used well before the Agile movement.
 
->Algo menos habitual es el método denominado remote pair programming. En este caso, los programadores no se sientan juntos, sino que están ubicados en lugares completamente diferentes. 
-Para que este método funcione, se debe contar con soluciones técnicas especiales. Aun a pesar de la distancia, los compañeros deben tener una línea de comunicación directa y deben poder acceder al código y visualizar las modificaciones en tiempo real.
+>Something less of a habit is a method denominates as remote pair programming. In this case, programmers don't sit together, they are located in totally different places. 
+For this method to work, special technical solutions must be used. Even at a distance, the teammates must have a direct line of communication and be able to access the code and visualize any changes in real-time.
 
->Está técnica de ping-pong programming puede ser usada de forma pedagógica para principiantes o por desarrolladores más experimentados de la siguiente forma:
+>This ping-pong technique for programming can be used in a pedagogic way on beginners or by experienced programmes in the following way:
 
->- **Principiante:** Le permite participar como navegador e intervenir de forma apropiada en el desarrollo de algún software. También le permite participar como conductor y explicar su código mientras lo escribe.
->- **Intermedio:** Le permite decidir en qué momento cambiar de rol. Sabe qué momento es bueno para tomar control del teclado de nuevo.
->- **Avanzado:** Le permite integrarse a lo que otro par ha estado trabajando y tomar la posición de navegador de forma más eficiente.
+>- **Beginner:** It allows them to practice as a navigator and intervene in an appropriate way in the development of software. It allows them to participate as a conductor and explain the code as it is being written.
+>- **Intermediate:** It allows them to decide at what moment to change rolls. They know which moment is best to take control of the keyboard again.
+>- **Advanced:** It allows them easy integration to what another pair has been working on and take the position of navigator in a more efficient way.
