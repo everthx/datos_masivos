@@ -2,7 +2,8 @@ Instituto Nacional de México
 Instituto Tecnológico de Tijuana
 Departamento de sistemas y computación
 
-Ingeniería informática
+Ingeniería Informática &
+Ingeniería Sistemas Computacionales
 Semestre Ago - Dic 2020
 
 Datos Masivos
