@@ -18,17 +18,17 @@ val df = spark.read.option("header", "true").option("inferSchema","true")csv("Ne
 
 ### 3 - What are the names of the columns?
 ```scala
-
+df.columns
 ```
 
 ### 4 - What is the name of the squema?
 ```scala
-
+df.printSchema()
 ```
 
 ### 5 - Print the first 5 columns:
 ```scala
-
+df.select($"Date",$"Open",$"High",$"Low",$"Close").show()
 ```
 
 ### 6 - Use .describre() to learn about the Dataframe:
