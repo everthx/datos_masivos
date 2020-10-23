@@ -45,8 +45,7 @@ df.filter($"Close"<600).count()
 //¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500?
 
 //¿Cuál es la correlación de Pearson entre columna “High” y la columna “Volumen”?
-df.select(corr("High","Volume")).show()
-
+df.stat.corr("High","Volume")
 
 //¿Cuál es el máximo de la columna “High” por año?
 
