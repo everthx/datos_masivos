@@ -2,7 +2,7 @@
 **By Hernandez Negrete Salma Fabel - 16212354 & Luna Fuentes Fernando 16210975**
 
 
-### 1 - Start a simple spark session:
+### 1 - Start a simple spark session::::
 ```console
 spark-shell
 ```
