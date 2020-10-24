@@ -72,8 +72,9 @@ df.stat.corr("High","Volume")
 ```
 >#### d. What is the per year max of the "High" column?
 ```scala
+df.groupBy(year(df("Date")).alias("Year")).max("High").sort(asc("Year")).show()
 ```
->#### e. What is the average of the "Close" column per monthin the calendar?
+>#### e. What is the average of the "Close" column per month in the calendar?
 ```scala
-
+df.groupBy(month(df("Date")).alias("Months")).max("Close").sort(asc("Months")).show()
 ```
