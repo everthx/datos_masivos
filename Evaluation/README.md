@@ -62,18 +62,22 @@ df.select(min("Volume")).show()
 ```scala
 df.filter($"Close"<600).count()
 ```
+
 >#### b. What time percentage was the "High" column greater than $500
 ```scala
 var hdf = df.filter($"High">500).count()*100/df.filter($"High">0).count()
 ```
+
 >#### c. What is the Pearson Correlation between columns "High" and "Volume"?
 ```scala
 df.stat.corr("High","Volume")
 ```
+
 >#### d. What is the per year max of the "High" column?
 ```scala
 df.groupBy(year(df("Date")).alias("Year")).max("High").sort(asc("Year")).show()
 ```
+
 >#### e. What is the average of the "Close" column per month in the calendar?
 ```scala
 df.groupBy(month(df("Date")).alias("Months")).max("Close").sort(asc("Months")).show()
