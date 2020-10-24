@@ -33,35 +33,47 @@ df.select($"Date",$"Open",$"High",$"Low",$"Close").show()
 
 ### 6 - Use .describre() to learn about the Dataframe:
 ```scala
-
+df.describe().show()
 ```
 
 ### 7 - Create a new dataframe with a column named "HV Ratio" which is the relation between the price on column "High" against column "Volume" of actions negotiated in a day. (Hint: Its an operation between columns)
 ```scala
-
+val dfnew = df.withColumn("HV Ratio", df("High")/df("Volume")).show()
 ```
 
 ### 8 - Which day did the "Close" columns had its highest peak?
 ```scala
-
+df.groupBy(df("Date").alias("Dia")).max("Close").sort(asc("Dia")).show(1)
 ```
 
 ### 9 - Write with your own words in a code comment, What is the meaning of the "Close" Column?
 ```scala
-
+/*Close is the average relation of exchange between High and Low that Netflix close don that day*/
 ```
 
 ### 10 - What is the max and min of the "Volume" column?
 ```scala
-
+df.select(max("Volume")).show()
+df.select(min("Volume")).show()
 ```
 
 ### 11 - With Scala/Spark $ syntax answer the following:
-#### a. How many days was the "Close" columns bellow $600?
-#### b. What time percentage was the "High" column greater than $500
-#### c. What is the Pearson Correlation between columns "High" and "Volume"?
-#### d. What is the per year max of the "High" column?
-#### e. What is the average of the "Close" column per monthin the calendar?
+>#### a. How many days was the "Close" columns bellow $600?
+```scala
+df.filter($"Close"<600).count()
+```
+>#### b. What time percentage was the "High" column greater than $500
+```scala
+var hdf = df.filter($"High">500).count()*100/df.filter($"High">0).count()
+```
+>#### c. What is the Pearson Correlation between columns "High" and "Volume"?
+```scala
+df.stat.corr("High","Volume")
+```
+>#### d. What is the per year max of the "High" column?
+```scala
+```
+>#### e. What is the average of the "Close" column per monthin the calendar?
 ```scala
 
 ```
