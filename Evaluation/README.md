@@ -43,7 +43,7 @@ val dfnew = df.withColumn("HV Ratio", df("High")/df("Volume")).show()
 
 ### 8 - Which day did the "Close" columns had its highest peak?
 ```scala
-df.groupBy(df("Date").alias("Dia")).max("Close").sort(asc("Dia")).show(1)
+df.orderBy($"Close".desc).show(1)
 ```
 
 ### 9 - Write with your own words in a code comment, What is the meaning of the "Close" Column?

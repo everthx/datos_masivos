@@ -18,22 +18,24 @@ df.head(5)
 
 //Usa describe () para aprender sobre el DataFrame.
 df.describe().show()
+
 //Crea un nuevo dataframe con una columna nueva llamada “HV Ratio” que es la relación entre el precio de la columna “High” frente a la columna “Volume” de
 //acciones negociadas por un día. (Hint: Es una operación de columnas).
-val dfnew = df.withColumn("HV Ratio", df("High")+df("Volume"))
+val dfnew = df.withColumn("HV Ratio", df("High")/df("Volume")).show()
 
 dfnew.show()
 
 //¿Qué día tuvo el pico más alto en la columna “Close”?
-df.select(max("Close")).show()
+df.orderBy($"Close".desc).show(1)
 
 //Escribe con tus propias palabras en un comentario de tu código. ¿Cuál es el
 //significado de la columna Cerrar “Close”?
 //es el corte en la posicion de la bolsa
 
 //¿Cuál es el máximo y mínimo de la columna “Volume”?
-df.select(max("Volumen")).show()
-df.select(min("Volumen")).show()
+df.select(max("Volume")).show()
+df.select(min("Volume")).show()
+
 
 //Con Sintaxis Scala/Spark $ conteste los siguiente:
 
