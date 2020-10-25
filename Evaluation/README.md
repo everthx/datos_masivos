@@ -81,5 +81,5 @@ df.groupBy(year(df("Date")).alias("Year")).max("High").sort(asc("Year")).show()
 
 >#### e. What is the average of the "Close" column per month in the calendar?
 ```scala
-df.groupBy(month(df("Date")).alias("Months")).max("Close").sort(asc("Months")).show()
+df.groupBy(month(df("Date")).alias("Months")).mean("Close").sort(asc("Months")).show()
 ```

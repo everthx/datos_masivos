@@ -14,13 +14,8 @@ df.columns//res2: Array[String] = Array(Date, Open, High, Low, Close, Volume, Ad
 //¿Cómo es el esquema?
 df.printSchema ()
 //Imprime las primeras 5 columnas.
-<<<<<<< HEAD
 df.head(5) //Imprime filas
 df.select($"Date",$"Open",$"High",$"Low",$"Close").show() //Imprime Columnas
-=======
-df.head(5) //Impresion de Filas
-df.select($"Date",$"Open",$"High",$"Low",$"Close").show() //Impresion de columnas
->>>>>>> 36013aa7656cab58767dcfb719e43623c2f2eddd
 
 //Usa describe () para aprender sobre el DataFrame.
 df.describe().show()
@@ -30,11 +25,7 @@ df.describe().show()
 val dfnew = df.withColumn("HV Ratio", df("High")/df("Volume")).show()
 
 //¿Qué día tuvo el pico más alto en la columna “Close”?
-<<<<<<< HEAD
 df.orderBy($"Close".desc).show(1)
-=======
-df.groupBy(df("Date").alias("Dia")).max("Close").sort(asc("Dia")).show(1)
->>>>>>> 36013aa7656cab58767dcfb719e43623c2f2eddd
 
 //Escribe con tus propias palabras en un comentario de tu código. ¿Cuál es el
 //significado de la columna Cerrar “Close”?
@@ -56,11 +47,7 @@ df.select(min("Volume")).show()
 df.filter($"Close"<600).count()
 
 //¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500?
-<<<<<<< HEAD
 var hdf = (df.filter($"High">500).count()*1.0/df.count())*100
-=======
-var hdf = df.filter($"High">500).count()*100/df.filter($"High">0).count()
->>>>>>> 36013aa7656cab58767dcfb719e43623c2f2eddd
 
 //¿Cuál es la correlación de Pearson entre columna “High” y la columna “Volumen”?
 df.stat.corr("High","Volume")
@@ -69,9 +56,4 @@ df.stat.corr("High","Volume")
 df.groupBy(year(df("Date")).alias("Year")).max("High").sort(asc("Year")).show()
 
 //¿Cuál es el promedio de columna “Close” para cada mes del calendario?
-df.groupBy(month(df("Date")).alias("Months")).max("Close").sort(asc("Months")).show()
-<<<<<<< HEAD
-=======
-
->>>>>>> 36013aa7656cab58767dcfb719e43623c2f2eddd
-
+df.groupBy(month(df("Date")).alias("Months")).mean("Close").sort(asc("Months")).show()
