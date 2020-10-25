@@ -28,7 +28,8 @@ df.printSchema()
 
 ### 5 - Print the first 5 columns:
 ```scala
-df.select($"Date",$"Open",$"High",$"Low",$"Close").show()
+df.head(5) //Prints 5 rows
+df.select($"Date",$"Open",$"High",$"Low",$"Close").show() //Prints 5 columns
 ```
 
 ### 6 - Use .describre() to learn about the Dataframe:
@@ -65,7 +66,7 @@ df.filter($"Close"<600).count()
 
 >#### b. What time percentage was the "High" column greater than $500
 ```scala
-var hdf = df.filter($"High">500).count()*100/df.filter($"High">0).count()
+var hdf = (df.filter($"High">500).count()*1.0/df.count())*100
 ```
 
 >#### c. What is the Pearson Correlation between columns "High" and "Volume"?
