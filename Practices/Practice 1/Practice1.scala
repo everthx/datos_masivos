@@ -40,7 +40,7 @@ Logger.getLogger("org").setLevel(Level.ERROR)
 
 val spark = SparkSession.builder().getOrCreate()
 
-val data  = spark.read.option("header","true").option("inferSchema", "true").format("csv").load("C:/Users/salmi/OneDrive/Documentos/GitHub/datos_masivos/Practices/Practice 2/advertising.csv")
+val data  = spark.read.option("header","true").option("inferSchema", "true").format("csv").load("C:/Users/salmi/OneDrive/Documentos/GitHub/datos_masivos/Practices/Practice 1/advertising.csv")
 
 data.printSchema()
 
