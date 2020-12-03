@@ -2,30 +2,13 @@
 
 //Correlation
 
-// $example on$
 import org.apache.spark.ml.linalg.{Matrix, Vectors}
 import org.apache.spark.ml.stat.Correlation
 import org.apache.spark.sql.Row
-// $example off$
+
 import org.apache.spark.sql.SparkSession
 
-/**
- * An example for computing correlation matrix.
- * Run with
- * {{{
- * bin/run-example ml.CorrelationExample
- * }}}
- */
-object CorrelationExample {
 
-  def main(args: Array[String]): Unit = {
-    val spark = SparkSession
-      .builder
-      .appName("CorrelationExample")
-      .getOrCreate()
-    import spark.implicits._
-
-    // $example on$
     val data = Seq(
       Vectors.sparse(4, Seq((0, 1.0), (3, -2.0))),
       Vectors.dense(4.0, 5.0, 0.0, 3.0),
@@ -39,11 +22,8 @@ object CorrelationExample {
 
     val Row(coeff2: Matrix) = Correlation.corr(df, "features", "spearman").head
     println(s"Spearman correlation matrix:\n $coeff2")
-    // $example off$
 
-    spark.stop()
-  }
-}
+  
 
 //Hypothesis testing
 
