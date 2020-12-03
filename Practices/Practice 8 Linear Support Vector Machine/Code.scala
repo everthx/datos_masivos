@@ -2,8 +2,10 @@
 
 //importing the Libraries
 import org.apache.spark.ml.classification.LinearSVC
+
+val spark = SparkSession.builder.appName("LinearSVCExample").getOrCreate()
 //Load training data
-val training = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+val training = spark.read.format("libsvm").load("C:/Users/salmi/OneDrive/Documentos/GitHub/datos_masivos/Practices/Practice 8 Linear Support Vector Machine/sample_libsvm_data.txt")
 
 val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
 //Fit the model

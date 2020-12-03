@@ -17,7 +17,7 @@ import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder().getOrCreate()
 
 // Utilice Spark para el archivo csv Clean-Ecommerce.
-val data = spark.read.option("header", "true").option("inferSchema","true")csv("C:/Users/salmi/OneDrive/Documentos/GitHub/datos_masivos/Practices/Practice 1/Clean-Ecommerce.csv")
+val data = spark.read.option("header", "true").option("inferSchema","true")csv("C:/Users/salmi/OneDrive/Documentos/GitHub/datos_masivos/Practices/Practice 2/Clean-Ecommerce.csv")
 
 // Imprima el schema en el DataFrame.
 data.printSchema()
