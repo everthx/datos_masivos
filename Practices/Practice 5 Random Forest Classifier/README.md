@@ -32,16 +32,13 @@ val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("i
 val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3))
 ```
 
-> 6- In this step we will train the model passing the indexed labels, the feaatures we have and the number of trees that we want from it.
+> 6- In this step we will train the model passing the indexed labels, the feaatures we have and the number of trees that we want from it. Then, We create an instance of IndexToString and set 2 label names that will store our predictions.
 ```scala
 val rf = new RandomForestClassifier().setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setNumTrees(10)
+
+val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels) 
 ```
 
-// Convert indexed labels back to original labels.
-val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels) 
-  //Aqui marca error <console>:32: error: value labelsArray is not a member of org.apache.spark.ml.feature.StringIndexer
- // labelConverter.transform(indexed)
-// Chain indexers and forest in a Pipeline.
 > 7- We will now create a Pipeline with all the gathered information so far. The Pipeline will allow us to input multiple extimations to a single stages array we can use further down.
 ```scala
 val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, rf, labelConverter))
@@ -70,8 +67,9 @@ val accuracy = evaluator.evaluate(predictions)
 println(s"Test Error = ${(1.0 - accuracy)}")
 ```
 
-//TODO("Check model stages")
-
+> 12- The next lines will allow us to create a stage model instance for RandomForestClassificationModel and print out the Learned classification of the forest model:
+```scala
 val rfModel = model.stages(2).asInstanceOf[RandomForestClassificationModel]
 
 println(s"Learned classification forest model:\n ${rfModel.toDebugString}")
+```
