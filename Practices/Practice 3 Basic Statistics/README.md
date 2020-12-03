@@ -47,6 +47,8 @@ val Row(coeff1: Matrix) = Correlation.corr(df, "features").head
 
 ```
 
+![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/Correlation1.PNG)
+
 Here the same is done as in the previous one, only it is assigned the value of the spearman correlation.
 
 ```scala
@@ -54,6 +56,11 @@ val Row(coeff2: Matrix) = Correlation.corr(df, "features", "spearman").head
     println(s"Spearman correlation matrix:\n $coeff2")
 
 ```
+
+![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/Correlation2.PNG)
+
+![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/Correlation3.PNG)
+
 
 ### Hypothesis testing
 
