@@ -23,8 +23,6 @@ import org.apache.spark.sql.SparkSession
     val Row(coeff2: Matrix) = Correlation.corr(df, "features", "spearman").head
     println(s"Spearman correlation matrix:\n $coeff2")
 
-  
-
 //Hypothesis testing
 
 import org.apache.spark.ml.linalg.{Vector, Vectors}
@@ -32,23 +30,6 @@ import org.apache.spark.ml.stat.ChiSquareTest
 // $example off$
 import org.apache.spark.sql.SparkSession
 
-/**
- * An example for Chi-square hypothesis testing.
- * Run with
- * {{{
- * bin/run-example ml.ChiSquareTestExample
- * }}}
- */
-object ChiSquareTestExample {
-
-  def main(args: Array[String]): Unit = {
-    val spark = SparkSession
-      .builder
-      .appName("ChiSquareTestExample")
-      .getOrCreate()
-    import spark.implicits._
-
-    // $example on$
     val data = Seq(
       (0.0, Vectors.dense(0.5, 10.0)),
       (0.0, Vectors.dense(1.5, 20.0)),
@@ -63,30 +44,14 @@ object ChiSquareTestExample {
     println(s"pValues = ${chi.getAs[Vector](0)}")
     println(s"degreesOfFreedom ${chi.getSeq[Int](1).mkString("[", ",", "]")}")
     println(s"statistics ${chi.getAs[Vector](2)}")
-    // $example off$
 
-    spark.stop()
-  }
-}
-
-//Summarizer
+// Summarizer
 
 import org.apache.spark.ml.linalg.{Vector, Vectors}
 import org.apache.spark.ml.stat.Summarizer
-// $example off$
+
 import org.apache.spark.sql.SparkSession
 
-object SummarizerExample {
-  def main(args: Array[String]): Unit = {
-    val spark = SparkSession
-      .builder
-      .appName("SummarizerExample")
-      .getOrCreate()
-
-    import spark.implicits._
-    import Summarizer._
-
-    // $example on$
     val data = Seq(
       (Vectors.dense(2.0, 3.0, 5.0), 1.0),
       (Vectors.dense(4.0, 6.0, 7.0), 2.0)
@@ -105,8 +70,3 @@ object SummarizerExample {
       .as[(Vector, Vector)].first()
 
     println(s"without weight: mean = ${meanVal2}, sum = ${varianceVal2}")
-    // $example off$
-
-    spark.stop()
-  }
-}
