@@ -73,3 +73,5 @@ val rfModel = model.stages(2).asInstanceOf[RandomForestClassificationModel]
 
 println(s"Learned classification forest model:\n ${rfModel.toDebugString}")
 ```
+
+//TODO("Print the output")
