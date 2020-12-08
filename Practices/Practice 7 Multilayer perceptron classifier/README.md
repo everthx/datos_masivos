@@ -59,6 +59,8 @@ Print the results
 
 ```scala
 println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
+
+//Test set accuracy = 0.9019607843137255
 ```
 
 
