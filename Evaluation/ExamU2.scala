@@ -13,15 +13,31 @@ import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 
 
-dataframe.columns
+dataframe.columns//Array[String] = Array(sepal_length, sepal_width, petal_length, petal_width, species)
 
 dataframe.printSchema()
+ //|-- sepal_length: double (nullable = true)
+ //|-- sepal_width: double (nullable = true)
+ //|-- petal_length: double (nullable = true)
+ //|-- petal_width: double (nullable = true)
+ //|-- species: string (nullable = true)
 
 dataframe.show(5)
 
+//+------------+-----------+------------+-----------+-------+
+//|sepal_length|sepal_width|petal_length|petal_width|species|
+//+------------+-----------+------------+-----------+-------+
+//|         5.1|        3.5|         1.4|        0.2| setosa|
+//|         4.9|        3.0|         1.4|        0.2| setosa|
+//|         4.7|        3.2|         1.3|        0.2| setosa|
+//|         4.6|        3.1|         1.5|        0.2| setosa|
+//|         5.0|        3.6|         1.4|        0.2| setosa|
+//+------------+-----------+------------+-----------+-------+
+//only showing top 5 rows
+
 dataframe.describe().show()
 
-val splits = data.randomSplit(Array(0.6, 0.4), seed = 1234L)
+val splits = dataframe.randomSplit(Array(0.7, 0.3), seed = 1234L)
 val train = splits(0)
 val test = splits(1)
 
@@ -29,7 +45,7 @@ val layers = Array[Int](4, 5, 4, 3)
 
 val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
 
-
+//error
 val model = trainer.fit(train)
 
 val result = model.transform(test)
