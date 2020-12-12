@@ -45,7 +45,13 @@ val layers = Array[Int](4, 5, 4, 3)
 
 val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
 
-//error
+//error Practice 1  and 2
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.Vectors
+
+val assembler = (new VectorAssembler().setInputCols(Array("", "")).setOutputCol("features"))
+
+
 val model = trainer.fit(train)
 
 val result = model.transform(test)
