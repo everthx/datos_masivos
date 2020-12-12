@@ -7,12 +7,16 @@ import org.apache.spark.sql.SparkSession
 
 val spark = SparkSession.builder().getOrCreate()
 val dataframe = spark.read.option("header", "true").option("inferSchema","true")csv("iris.csv")
+
+var df = dataframe.distinct()
+
+df = df.withColumn("speciesNumber", when($"species"==="setosa","1").when(col("species")==="virginica","2").otherwise("3"))
 ```
+
 ### a. Use Spark's Mllib library corresponding to the Multilayer Perceptron.
 ```scala
 import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
-
 ```
 
 ### 2- What are the names of the columns?
@@ -37,7 +41,7 @@ dataframe.describe().show()
 
 ### 6- Perform the corresponding transformation for the categorical data which will become the labels we'll classify.
 ```scala
-
+//TODO("P7")
 ```
 
 ### 7- Build the classification model and explain its architecture:
