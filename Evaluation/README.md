@@ -21,36 +21,50 @@ import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 
 ### 2- What are the names of the columns?
 ```scala
-dataframe.columns
+df.columns
 ```
 
 ### 3- How is the squema?
 ```scala
-dataframe.printSchema()
+df.printSchema()
 ```
 
 ### 4- Print the first 5 columns:
 ```scala
-dataframe.show(5)
+df.show(5)
 ```
 
 ### 5- Use the describe() method to learn about the data on the dataframe:
 ```scala
-dataframe.describe().show()
+df.describe().show()
 ```
 
 ### 6- Perform the corresponding transformation for the categorical data which will become the labels we'll classify.
 ```scala
-//TODO("P7")
+val assembler = (new VectorAssembler().setInputCols(Array("sepal_length", "sepal_width","petal_length", "petal_width")).setOutputCol("features"))
+
+val output = assembler.transform(df)
 ```
 
 ### 7- Build the classification model and explain its architecture:
 ```scala
+val splits = output.randomSplit(Array(0.7, 0.3), seed = 1234L)
+val train = splits(0)
+val test = splits(1)
 
+val layers = Array[Int](4, 5, 4, 3)
+
+val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
+
+val model = trainer.fit(train)
 ```
 ### 8- Print the model's results:
 ```scala
+val result = model.transform(test)
+val predictionAndLabels = result.select("prediction", "label")
+val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
 
+println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
 ```
 
 ### [Code Explanation Video]()
