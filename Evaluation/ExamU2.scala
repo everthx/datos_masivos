@@ -30,60 +30,61 @@ dataframe.show(5)
 //+------------+-----------+------------+-----------+-------+
 //only showing top 5 rows
 
-val df = dataframe.withColumn("species", when($"species"==="setosa","1").when(col("species")==="virginica","2").otherwise("3").cast("int"))
 
-df.columns//Array[String] = Array(sepal_length, sepal_width, petal_length, petal_width, species)
-
-df.printSchema()
-//|-- sepal_length: double (nullable = true)
-//|-- sepal_width: double (nullable = true)
-//|-- petal_length: double (nullable = true)
-//|-- petal_width: double (nullable = true)
-//|-- species: integer (nullable = true)
-
-df.show(5)
-
-//+------------+-----------+------------+-----------+-------+
-//|sepal_length|sepal_width|petal_length|petal_width|species|
-//+------------+-----------+------------+-----------+-------+
-//|         5.1|        3.5|         1.4|        0.2|      1|
-//|         4.9|        3.0|         1.4|        0.2|      1|
-//|         4.7|        3.2|         1.3|        0.2|      1|
-//|         4.6|        3.1|         1.5|        0.2|      1|
-//|         5.0|        3.6|         1.4|        0.2|      1|
-//+------------+-----------+------------+-----------+-------+
-//only showing top 5 rows
-
-
-df.describe().show()
 
 //Practice 1  and 2 (error feactures)
-val assembler = (new VectorAssembler().setInputCols(Array("sepal_length", "sepal_width","petal_length", "petal_width")).setOutputCol("features"))
-
-val features = assembler.transform(df)
-features.show()
-//+------------+-----------+------------+-----------+-------+-----------------+
-//|sepal_length|sepal_width|petal_length|petal_width|species|         features|
-//+------------+-----------+------------+-----------+-------+-----------------+
-//|         5.1|        3.5|         1.4|        0.2|      1|[5.1,3.5,1.4,0.2]|
-//|         4.9|        3.0|         1.4|        0.2|      1|[4.9,3.0,1.4,0.2]|
-//|         4.7|        3.2|         1.3|        0.2|      1|[4.7,3.2,1.3,0.2]|
-//|         4.6|        3.1|         1.5|        0.2|      1|[4.6,3.1,1.5,0.2]|
 
 val indexer = new StringIndexer().setInputCol("species").setOutputCol("label")
-val output = indexer.fit(features).transform(features)
+val df = indexer.fit(dataframe).transform(dataframe)
+
+df.columns// Array[String] = Array(sepal_length, sepal_width, petal_length, petal_width, species, label)
+
+df.printSchema()
+ //|-- sepal_length: double (nullable = true)
+// |-- sepal_width: double (nullable = true)
+ //|-- petal_length: double (nullable = true)
+// |-- petal_width: double (nullable = true)
+// |-- species: string (nullable = true)
+// |-- label: double (nullable = false)
+
+df.show(5)
++------------+-----------+------------+-----------+-------+-----+
+|sepal_length|sepal_width|petal_length|petal_width|species|label|
++------------+-----------+------------+-----------+-------+-----+
+|         5.1|        3.5|         1.4|        0.2| setosa|  2.0|
+|         4.9|        3.0|         1.4|        0.2| setosa|  2.0|
+|         4.7|        3.2|         1.3|        0.2| setosa|  2.0|
+|         4.6|        3.1|         1.5|        0.2| setosa|  2.0|
+|         5.0|        3.6|         1.4|        0.2| setosa|  2.0|
++------------+-----------+------------+-----------+-------+-----+
+only showing top 5 rows
+
+df.describe().show()
++-------+------------------+-------------------+------------------+------------------+---------+------------------+
+|summary|      sepal_length|        sepal_width|      petal_length|       petal_width|  species|             label|
++-------+------------------+-------------------+------------------+------------------+---------+------------------+
+|  count|               150|                150|               150|               150|      150|               150|
+|   mean| 5.843333333333335| 3.0540000000000007|3.7586666666666693|1.1986666666666672|     null|               1.0|
+| stddev|0.8280661279778637|0.43359431136217375| 1.764420419952262|0.7631607417008414|     null|0.8192319205190403|
+|    min|               4.3|                2.0|               1.0|               0.1|   setosa|               0.0|
+|    max|               7.9|                4.4|               6.9|               2.5|virginica|               2.0|
++-------+------------------+-------------------+------------------+------------------+---------+------------------+
+
+val assembler = (new VectorAssembler().setInputCols(Array("sepal_length", "sepal_width","petal_length", "petal_width")).setOutputCol("features"))
+
+val output = assembler.transform(df)
 output.show(5)
 
-//+------------+-----------+------------+-----------+-------+-----------------+-----+
-//|sepal_length|sepal_width|petal_length|petal_width|species|         features|label|
-//+------------+-----------+------------+-----------+-------+-----------------+-----+
-//|         5.1|        3.5|         1.4|        0.2|      1|[5.1,3.5,1.4,0.2]|  2.0|
-//|         4.9|        3.0|         1.4|        0.2|      1|[4.9,3.0,1.4,0.2]|  2.0|
-//|         4.7|        3.2|         1.3|        0.2|      1|[4.7,3.2,1.3,0.2]|  2.0|
-//|         4.6|        3.1|         1.5|        0.2|      1|[4.6,3.1,1.5,0.2]|  2.0|
-//|         5.0|        3.6|         1.4|        0.2|      1|[5.0,3.6,1.4,0.2]|  2.0|
-//+------------+-----------+------------+-----------+-------+-----------------+-----+
-//only showing top 5 rows
++------------+-----------+------------+-----------+-------+-----+-----------------+
+|sepal_length|sepal_width|petal_length|petal_width|species|label|         features|
++------------+-----------+------------+-----------+-------+-----+-----------------+
+|         5.1|        3.5|         1.4|        0.2| setosa|  2.0|[5.1,3.5,1.4,0.2]|
+|         4.9|        3.0|         1.4|        0.2| setosa|  2.0|[4.9,3.0,1.4,0.2]|
+|         4.7|        3.2|         1.3|        0.2| setosa|  2.0|[4.7,3.2,1.3,0.2]|
+|         4.6|        3.1|         1.5|        0.2| setosa|  2.0|[4.6,3.1,1.5,0.2]|
+|         5.0|        3.6|         1.4|        0.2| setosa|  2.0|[5.0,3.6,1.4,0.2]|
++------------+-----------+------------+-----------+-------+-----+-----------------+
+only showing top 5 rows
 
 
 //error
@@ -103,5 +104,5 @@ val predictionAndLabels = result.select("prediction", "label")
 val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
 
 println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
-//Test set accuracy = 0.9
+//Test set accuracy = 0.95
 
