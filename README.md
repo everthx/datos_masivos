@@ -9,14 +9,14 @@
 ## Unit 1 Index
 
 ### Practices
-> * [GIT FLOW](https://github.com/everthx/datos_masivos/blob/Unit_1/Practices/Git%20Flow/README.md)
-> * [PRACTICE 1](https://github.com/everthx/datos_masivos/blob/Unit_1/Practices/Practice1/README.md)
-> * [PRACTICE 2](https://github.com/everthx/datos_masivos/blob/Unit_1/Practices/Practice2/README.md)
-> * [PRACTICE 3](https://github.com/everthx/datos_masivos/blob/Unit_1/Practices/Practice3/README.md)
-> * [PRACTICE 4](https://github.com/everthx/datos_masivos/blob/Unit_1/Practices/Practice4/README.md)
-> * [PRACTICE 5](https://github.com/everthx/datos_masivos/blob/Unit_1/Practices/Practice5/README.md)
+> * [GIT FLOW](https://github.com/everthx/datos_masivos/tree/Unit_1/Unit_1/Practices/Git%20Flow#practice-git-flow)
+> * [PRACTICE 1](https://github.com/everthx/datos_masivos/tree/Unit_1/Unit_1/Practices/Practice1#practice-1)
+> * [PRACTICE 2](https://github.com/everthx/datos_masivos/tree/Unit_1/Unit_1/Practices/Practice2#practice-2)
+> * [PRACTICE 3](https://github.com/everthx/datos_masivos/tree/Unit_1/Unit_1/Practices/Practice3#practice-3)
+> * [PRACTICE 4](https://github.com/everthx/datos_masivos/tree/Unit_1/Unit_1/Practices/Practice4#practice-4)
+> * [PRACTICE 5](https://github.com/everthx/datos_masivos/tree/Unit_1/Unit_1/Practices/Practice5#practice-5)
 ### Homework Assignments
-> * [PAIR CODING](https://github.com/everthx/datos_masivos/blob/Unit_1/Homework/01%20Pair%20Programming.md)
-> * [PEARSON'S CORRELATION](https://github.com/everthx/datos_masivos/blob/Unit_1/Homework/02%20Pearson's%20Correlation.md)
+> * [PAIR CODING](https://github.com/everthx/datos_masivos/blob/Unit_1/Unit_1/Homework/01%20Pair%20Programming.md#pair-programming)
+> * [PEARSON'S CORRELATION](https://github.com/everthx/datos_masivos/blob/Unit_1/Unit_1/Homework/02%20Pearson's%20Correlation.md#pearsons-correlation)
 ### Unit 1 Evaluation
-> * [Evaluation](https://github.com/everthx/datos_masivos/blob/Unit_1/Evaluation/README.md)
+> * [Evaluation](https://github.com/everthx/datos_masivos/tree/Unit_1/Unit_1/Evaluation#big-data-datos-masivos-unit-1-exam)
