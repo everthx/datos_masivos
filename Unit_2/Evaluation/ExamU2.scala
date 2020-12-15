@@ -1,6 +1,6 @@
 //Exam Unit 2
 
-//import required libraries
+//Import the required libraries
 import org.apache.spark.ml.feature.StringIndexer 
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.linalg.Vectors
@@ -11,10 +11,10 @@ import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder().getOrCreate()
 
-//DataFrame
+//Load the DataFrame
 val dataframe = spark.read.option("header", "true").option("inferSchema","true")csv("iris.csv")
 
-//squema
+//Print the squema
 dataframe.printSchema()
  //|-- sepal_length: double (nullable = true)
  //|-- sepal_width: double (nullable = true)
@@ -22,9 +22,9 @@ dataframe.printSchema()
  //|-- petal_width: double (nullable = true)
  //|-- species: string (nullable = true)
 
+
 //Print the first 5 columns
 dataframe.show(5)
-
 //+------------+-----------+------------+-----------+-------+
 //|sepal_length|sepal_width|petal_length|petal_width|species|
 //+------------+-----------+------------+-----------+-------+
@@ -43,9 +43,10 @@ val  stringindexer = new StringIndexer().setInputCol("species").setOutputCol("la
 val df =  stringindexer.fit(dataframe).transform(dataframe)
 
 //New Columns
-df.columns// Array[String] = Array(sepal_length, sepal_width, petal_length, petal_width, species, label)
+df.columns
+// Array[String] = Array(sepal_length, sepal_width, petal_length, petal_width, species, label)
 
-//New squema
+//Print the new squema
 df.printSchema()
  //|-- sepal_length: double (nullable = true)
 // |-- sepal_width: double (nullable = true)
@@ -78,8 +79,7 @@ df.describe().show()
 //|    max|               7.9|                4.4|               6.9|               2.5|virginica|               2.0|
 //+-------+------------------+-------------------+------------------+------------------+---------+------------------+
 
-//Let the assembler object convert the input values ​​to a vector. Use the VectorAssembler object to convert the input columns of the df to a single output column of an array called "features", Set the input columns from where we are supposed to read the values
-
+//Let the assembler object converts the input values ​​to a vector. Use the VectorAssembler object to convert the input columns of the df to a single output column of an array called "features", set the input columns from where we are supposed to read the values.
 val assembler = (new VectorAssembler().setInputCols(Array("sepal_length", "sepal_width","petal_length", "petal_width")).setOutputCol("features"))
 
 val output = assembler.transform(df).select($"label", $"features")
@@ -98,18 +98,18 @@ output.show(5)
 
 
 //MultilayerPerceptronClassifier
-//separates the characteristics into 70% training and 30% testing
+//Separates the characteristics into 70% training and 30% testing
 val splits = output.randomSplit(Array(0.7, 0.3), seed = 1234L)
 val train = splits(0)
 val test = splits(1)
 
-//We have "layers" of size 4 (characteristics), two intermediate ones of size 5 and 4 and output of size 3 (classes).
+//We have "layers" with a size of 4 (characteristics), two intermediate ones of size 5 and 4 and output of size 3 (classes).
 val layers = Array[Int](4, 5, 4, 3)
 
-//We have a “trainer” that the coach creates and establishes his parameters.
+//We have a “trainer” that the coach creates and establishes its parameters.
 val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
 
-//"Trainer" model
+//Now we create the model with the trainer and training data.
 val model = trainer.fit(train)
 
 //Calculate the precision on the test equipment
