@@ -82,19 +82,19 @@ df.describe().show()
 
 val assembler = (new VectorAssembler().setInputCols(Array("sepal_length", "sepal_width","petal_length", "petal_width")).setOutputCol("features"))
 
-val output = assembler.transform(df)
-output.show(5)
+val output = assembler.transform(df).select($"label", $"features")
 
-//+------------+-----------+------------+-----------+-------+-----+-----------------+
-//|sepal_length|sepal_width|petal_length|petal_width|species|label|         features|
-//+------------+-----------+------------+-----------+-------+-----+-----------------+
-//|         5.1|        3.5|         1.4|        0.2| setosa|  2.0|[5.1,3.5,1.4,0.2]|
-//|         4.9|        3.0|         1.4|        0.2| setosa|  2.0|[4.9,3.0,1.4,0.2]|
-//|         4.7|        3.2|         1.3|        0.2| setosa|  2.0|[4.7,3.2,1.3,0.2]|
-//|         4.6|        3.1|         1.5|        0.2| setosa|  2.0|[4.6,3.1,1.5,0.2]|
-//|         5.0|        3.6|         1.4|        0.2| setosa|  2.0|[5.0,3.6,1.4,0.2]|
-//+------------+-----------+------------+-----------+-------+-----+-----------------+
-//only showing top 5 rows
+output.show(5)
+//+-----+-----------------+
+//|label|         features|
+//+-----+-----------------+
+//|  2.0|[5.1,3.5,1.4,0.2]|
+//|  2.0|[4.9,3.0,1.4,0.2]|
+//|  2.0|[4.7,3.2,1.3,0.2]|
+//|  2.0|[4.6,3.1,1.5,0.2]|
+//|  2.0|[5.0,3.6,1.4,0.2]|
+//+-----+-----------------+
+//only showing top 5 rows   
 
 
 //MultilayerPerceptronClassifier
@@ -103,15 +103,19 @@ val splits = output.randomSplit(Array(0.7, 0.3), seed = 1234L)
 val train = splits(0)
 val test = splits(1)
 
+//We have "layers" of size 4 (characteristics), two intermediate ones of size 5 and 4 and output of size 3 (classes).
 val layers = Array[Int](4, 5, 4, 3)
 
+//We have a “trainer” that the coach creates and establishes his parameters.
 val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
 
+//"Trainer" model
 val model = trainer.fit(train)
 
+//Calculate the precision on the test equipment
 val result = model.transform(test)
 val predictionAndLabels = result.select("prediction", "label")
 val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
 
 println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
-//Test set accuracy = 0.95
+//Test set accuracy = 0.925
