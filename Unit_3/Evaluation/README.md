@@ -1,13 +1,13 @@
 # Datos Masivos: Unit 3 Evaluation
 **By Hernandez Negrete Salma Fabel - 16212354 & Luna Fuentes Fernando 16210975**
 
-## Instrucciones
-> Desarrolle las siguientes instrucciones en Spark con el lenguaje de programación Scala.
+## Instructions:
+> Do the following instructions in Spark with the Scala programming language.
 
-## Objetivo:
-> El objetivo de este examen practico es tratar de agrupar los clientes de regiones específicas de un distribuidor al mayoreo. Esto en base a las ventas de algunas categorías de productos.
+## Objective:
+> The objective of this practical exam is to try and group the region specific customers of a wholesale distributor. This based on the sales of some product categories.
 
-> Las fuente de datos se encuentra en el repositorio:
+> The data source is found in the following repository:
 https://github.com/jcromerohdz/BigData/blob/master/Spark_clustering/Wholesale%20customers%20data.csv
 
 ## 1. Import a simple Spark session.
