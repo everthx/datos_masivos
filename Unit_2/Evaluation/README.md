@@ -132,4 +132,4 @@ println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
 ////Test set accuracy = 0.925
 ```
 
-### [Code Explanation Video]()
+### [Code Explanation Video](https://youtu.be/BXeljTybJCU)
