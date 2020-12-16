@@ -18,19 +18,19 @@
 //    'Clicked on Ad': 0 or 1 indicated clicking on Ad
 
 //////////////////////////////////////////////////////////
-// Complete las siguientes tareas que estan comentas ////
+// Complete the following commented tasks ////
 /////////////////////////////////////////////////////////
 
 
 ////////////////////////
-/// Tome los datos //////
+/// Import data //////
 //////////////////////
 
-// Importe una  SparkSession con la libreria Logistic Regression
-// Optional: Utilizar el codigo de  Error reporting
-// Cree un sesion Spark 
-// Utilice Spark para leer el archivo csv Advertising.
-// Imprima el Schema del DataFrame
+// Import a SparkSeccion with the Logistic Regression library
+// Optional: Use theError reporting code
+// Create a Spark Session 
+// Use Spark to read the csv file "Advertising".
+// Print the dataframe schema.
 
 //Analysis:To be able to perform the logistic regression, you must first import the “logisticRegression” 
 //library. After we configure the errors, then the simple spark session is created and we load our 
@@ -61,10 +61,10 @@ data.printSchema()
 
 
 ///////////////////////
-/// Despliegue los datos /////
+/// Data Display /////
 /////////////////////
 
-// Imprima un renglon de ejemplo 
+// Print a single row.
 
 data.head(1)
 // Array[org.apache.spark.sql.Row] = Array([68.95,35,61833.9,256.09,Cloned 
@@ -87,16 +87,14 @@ for(ind <- Range(1, colnames.length)){
     println("\n")
 }
 
-
-
 ////////////////////////////////////////////////////
-//// Preparar el DataFrame para Machine Learning ////
+//// Prepare the DataFrame for Machine Learning ////
 //////////////////////////////////////////////////
 
-//   Hacer lo siguiente:
-//    - Renombre la columna "Clicked on Ad" a "label"
-//    - Tome la siguientes columnas como features "Daily Time Spent on Site","Age","Area Income","Daily Internet Usage","Timestamp","Male"
-//    - Cree una nueva clolumna llamada "Hour" del Timestamp conteniendo la  "Hour of the click"
+//   Do the following:
+//    - Rename the column "Clicked on Ad" to "label"
+//    - Take the following columns as features, "Daily Time Spent on Site","Age","Area Income","Daily Internet Usage","Timestamp","Male"
+//    - Create a new columns called "Hour" with a timestamp containing  "Hour of the click"
 
 //Analysis:With the variable "timedata" we add a new column called "time" taking the data from the 
 //column "Timestamp" that is already existing in the dataframe. After that we select the column 
@@ -107,9 +105,9 @@ val timedata = data.withColumn("Hour",hour(data("Timestamp")))
 
 val logregdata = timedata.select(data("Clicked on Ad").as("label"), $"Daily Time Spent on Site", $"Age", $"Area Income", $"Daily Internet Usage", $"Hour", $"Male")
 
-// Importe VectorAssembler y Vectors
+// Imports the VectorAssembler and Vectors
 
-// Cree un nuevo objecto VectorAssembler llamado assembler para los feature
+// Create a new vector VectorAssembler called assembler for the features.
 
 //Analysis:We import the library of "VectorAssembler" and "Vectors", then we create 
 //"assembler" where we are going to convert the input values ​​of the data frame, 
@@ -123,9 +121,7 @@ val assembler = (new VectorAssembler()
                   .setInputCols(Array("Daily Time Spent on Site", "Age","Area Income","Daily Internet Usage","Hour","Male"))
                   .setOutputCol("features"))
 
-
-
-// Utilice randomSplit para crear datos de train y test divididos en 70/30
+// Use randomSplit to create data for train and test divided into 70/30
 
 //Analysis:Here we have two types of data, some will be training and others will be test, 
 //which will be 70% and 30% respectively of our data frame, when using "randomSplit"
@@ -135,21 +131,22 @@ val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 12345
 
 
 ///////////////////////////////
-// Configure un Pipeline ///////
+// Configure a Pipeline ///////
 /////////////////////////////
 
-// Importe  Pipeline
-// Cree un nuevo objeto de  LogisticRegression llamado lr
-// Cree un nuevo  pipeline con los elementos: assembler, lr
-// Ajuste (fit) el pipeline para el conjunto de training.
+// Import a  Pipeline
+// Create a new LogisticRegression object called lr
+// Create a new pipeline object with the following elements: assembler, lr
+// Adjust (fit) the pipeline for the training set.
 
 
-// Tome los Resultados en el conjuto Test con transform
+// Take the results from the Test set with transform.
 
 //Analysis:We import the “pipeline” library, we create a logistic regression object, 
 //then we create a “pipeline” which will have the elements of “assembler” and 
 //“lr” that we created previously, then we create the model which will have the 
 //training data and "Results" that will take the results of the model to the test data.
+
 import org.apache.spark.ml.Pipeline
 
 val lr = new LogisticRegression()
@@ -161,13 +158,13 @@ val model = pipeline.fit(training)
 val results = model.transform(test)
 
 ////////////////////////////////////
-//// Evaluacion del modelo /////////////
+//// Evaluating the model /////////////
 //////////////////////////////////
 
-// Para Metrics y Evaluation importe MulticlassMetrics
-// Convierta los resutalos de prueba (test) en RDD utilizando .as y .rdd
-// Inicialice un objeto MulticlassMetrics 
-// Imprima la  Confusion matrix
+// Import MulticlassMetrics for metrics and evaluation.
+// Convert the test results (test) on RDD using .as and .rdd
+// Inicialize a MulticlassMetrics object  
+// Print the Confusion matrix
 
 //Analysis:We import the library of "VectorAssembler" and "Vectors", then we create "assembler" 
 //where we are going to convert the input values ​​of the data frame, where with the objective of 
