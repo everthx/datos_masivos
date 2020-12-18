@@ -71,4 +71,4 @@ println(s"Within Set Sum of Squared Errors = $WSSE")
 model.clusterCenters.foreach(println)
 ```
 
-[Video Explanation]()
+[Video Explanation](https://youtu.be/Wh0iJEQ3yT0)
