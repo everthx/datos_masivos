@@ -1,8 +1,10 @@
 <html>
 <h2 align="center" > Datos Masivos: Final Project</h2>
 
-<div  align="center"  >
+<div  align="center" >
+
 ![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/portada.PNG)
+
 </div>
 
 <h3 align="center" >Instituto Nacional de México</h3>
