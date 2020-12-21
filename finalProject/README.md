@@ -1,7 +1,6 @@
 # Datos Masivos: Final Project
 **By Hernandez Negrete Salma Fabel - 16212354 & Luna Fuentes Fernando 16210975**
 
-<div style="text-align:center">
-Instituto Nacional de México
-</div>
+<h2style="font-size:% ;font-family: Times New Roman"; aling="center" colspan="2"> Instituto Nacional de México</h2>
+
 
