@@ -10,5 +10,6 @@
 # Index
 
 - [Final Proyect](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/FinalProyect.scala)
-- [Document Final Proyect](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Document%20Final%20Proyect.md#-datos-masivos-final-project)
+- [Final Proyect Document](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#-final-project-document)
+- [Final Proyect Document (in Spanish .pdf)]()
 
