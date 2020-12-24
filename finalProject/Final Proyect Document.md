@@ -19,8 +19,14 @@
 <h4 align="center" >Unit 4</h4>
 <h4 align="center" >Final Project</h4>
 <br>
+<h4 align="center" >Made by : </h4>
 <h4 align="center" >Hernandez Negrete Salma Fabel - 16212354</h4>
 <h4 align="center" >Luna Fuentes Fernando - 16210975</h4>
+<br>
+<h4 align="center" >Teacher : </h4>
+<h4 align="center" >Dr. Jose Christian Romero Hernandez</h4>
+<br>
+<h4 align="center" >Delivery date: January 2021</h4>
 </html>
 
 # Index
@@ -57,6 +63,13 @@ The support vectors are the points that define the maximum margin of separation 
 ![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/IMAGEN%20Linear%20Support%20Vector%20Machine.PNG)
 
 </div>
+
+<p align="justify" >
+SVM can be of two types:
+
+- **Linear SVM:** Linear SVM is used for linearly separable data, which means that if a data set can be classified into two classes using a single straight line, then such data is called linearly separable data and the classifier is used as linear SVM classifier. .
+- **Non-linear SVM:** Non-linear SVM is used for non-linearly separated data, which means that if a data set cannot be classified by a straight line, then the data is called non-linear data and the classifier used is called non-linear linear SVM classifier. [2]
+</p>
 
 ### Decision Three
 
