@@ -27,7 +27,10 @@
 - [Introduction](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#introduction)
 - [Theoretical framework of algorithms](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#theoretical-framework-of-algorithms)
 - [Implementation]()
- - [SVM]()
+  - [SVM]()
+- [Results]()
+- [Conclusions]()
+- [References]()
 
 # Introduction
 
@@ -39,7 +42,7 @@ The implementation of these algorithms is explained, as well as the result that 
 
 # Theoretical framework of algorithms
 
-## SVM
+### SVM
 
 <p align="justify" >
 The acronym SVM for its acronym in English (Support Vector Machines). They can be used for both regression and classification. Support vector machines are a machine learning technique that finds the best possible separation between classes. With two dimensions it is easy to understand what you are doing. Typically, machine learning problems have many dimensions. So instead of finding the optimal line, the SVM finds the hyperplane that maximizes the separation margin between classes. [1]
@@ -55,13 +58,13 @@ The support vectors are the points that define the maximum margin of separation 
 
 </div>
 
-## Decision Three
+### Decision Three
 
 
-## Logistic regression
+### Logistic regression
 
 
-## Multilayer Perceptron
+### Multilayer Perceptron
 
 
 # Implementation
