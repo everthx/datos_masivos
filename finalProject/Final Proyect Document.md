@@ -28,6 +28,12 @@
 
 # Introduction
 
+<p align="justify" >
+This document specifies the analysis and development of the final project of unit 4 of the matter of big data, which the objective of this final project is to compare the Machine Learning performance algorithms that were seen during the semester, which The Bank Marketing data set obtained from the following source will be used:
+https://archive.ics.uci.edu/ml/datasets/Bank+Marketing
+The implementation of these algorithms is explained, as well as the result that was reached, through a tabulation to better visualize the performance of each one of them.
+</p>
+
 # Theoretical framework of algorithms
 
 # Implementation

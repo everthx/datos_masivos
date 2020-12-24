@@ -2,7 +2,14 @@
 <h2 align="center" > Datos Masivos: Final Project</h2>
 <h3>Introduction</h3>
 
+<p align="justify" >
+This document specifies the analysis and development of the final project of unit 4 of the matter of big data, which the objective of this final project is to compare the Machine Learning performance algorithms that were seen during the semester, which The Bank Marketing data set obtained from the following source will be used:
+https://archive.ics.uci.edu/ml/datasets/Bank+Marketing
+The implementation of these algorithms is explained, as well as the result that was reached, through a tabulation to better visualize the performance of each one of them.
+</p>
+
 <br>
+<h4>Made by : </h4>
 <h4>Hernandez Negrete Salma Fabel - 16212354</h4>
 <h4>Luna Fuentes Fernando - 16210975</h4>
 </html>
