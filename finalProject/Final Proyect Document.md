@@ -73,6 +73,22 @@ SVM can be of two types:
 
 ### Decision Three
 
+<p align="justify" >
+In decision analysis, you can use a decision tree to visually and explicitly represent decisions and decision making. As its name implies, it uses a decision model in the form of a tree. Although it is a commonly used tool in data mining to derive a strategy to achieve a particular goal, it is also widely used in machine learning. [3]
+It is a tree-structured classifier, where the internal nodes represent the characteristics of a data set, the branches represent the decision rules, and each leaf node represents the result. [4]
+In a decision tree, there are two nodes, which are the decision node and the leaf node. Decision nodes are used to make any decision and have multiple branches, while leaf nodes are the result of those decisions and contain no more branches. Decisions or testing are made based on the characteristics of the given data set. [4]
+</p>
+
+
+<div  align="center" >
+
+![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/three.PNG)
+
+</div>
+
+<p align="justify" >
+A decision tree is drawn upside down with its root at the top. In the image to the left, the bold black text represents an internal node / condition, according to which the tree is divided into branches / edges. The end of the branch that is no longer divided is the decision / leaf, in this case, whether the passenger died or survived, represented as red and green text respectively. [3]
+</p>
 
 ### Logistic regression
 
@@ -93,4 +109,9 @@ SVM can be of two types:
 
 >[1] José Martínez Heras. (28/05/2019). Máquinas de Vectores de Soporte (SVM). 23/12/2020, de iartificial.net Sitio web: https://www.iartificial.net/maquinas-de-vectores-de-soporte-svm/
 
->
+>[2] JavaTpoint. (2018). Algoritmo de máquina de vectores de soporte. 23/12/2020, de JavaTpoint Sitio web: https://www.javatpoint.com/machine-learning-support-vector-machine-algorithm
+
+>[3] Prashant Gupta. (17/05/2017). Árboles de decisión en el aprendizaje automático. 23/12/2020, de towardsdatascience.com Sitio web: https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052
+
+>[4] JavaTpoint. (2018). Algoritmo de clasificación de árboles de decisión. 23/12/2020, de JavaTpoint Sitio web: https://www.javatpoint.com/machine-learning-decision-tree-classification-algorithm
+
