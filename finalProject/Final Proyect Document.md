@@ -24,7 +24,9 @@
 </html>
 
 # Index
-- [Introduction](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Document%20Final%20Proyect.md#introduction)
+- [Introduction](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#introduction)
+- [Theoretical framework of algorithms](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#theoretical-framework-of-algorithms)
+  - [SVM]()
 
 # Introduction
 
