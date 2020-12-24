@@ -14,7 +14,7 @@ The implementation of these algorithms is explained, as well as the result that 
 <h4>Luna Fuentes Fernando - 16210975</h4>
 </html>
 
-# Index
+# Final Proyect Index
 
 - [Final Proyect](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/FinalProyect.scala)
 - [Final Proyect Document](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#-final-project-document)

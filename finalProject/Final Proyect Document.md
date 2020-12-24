@@ -26,7 +26,8 @@
 # Index
 - [Introduction](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#introduction)
 - [Theoretical framework of algorithms](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#theoretical-framework-of-algorithms)
-  - [SVM]()
+- [Implementation]()
+ - [SVM]()
 
 # Introduction
 
@@ -38,10 +39,42 @@ The implementation of these algorithms is explained, as well as the result that 
 
 # Theoretical framework of algorithms
 
+## SVM
+
+<p align="justify" >
+The acronym SVM for its acronym in English (Support Vector Machines). They can be used for both regression and classification. Support vector machines are a machine learning technique that finds the best possible separation between classes. With two dimensions it is easy to understand what you are doing. Typically, machine learning problems have many dimensions. So instead of finding the optimal line, the SVM finds the hyperplane that maximizes the separation margin between classes. [1]
+</p>
+
+<p align="justify" >
+The support vectors are the points that define the maximum margin of separation of the hyperplane that separates the classes. They are called vectors, instead of points, because these "points" have as many elements as the dimensions of our input space. That is, these multi-dimensional points are represented with an n-dimensional vector. [1]
+</p>
+
+<div  align="center" >
+
+![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/IMAGEN%20Linear%20Support%20Vector%20Machine.PNG)
+
+</div>
+
+## Decision Three
+
+
+## Logistic regression
+
+
+## Multilayer Perceptron
+
+
 # Implementation
+
 
 # Results
 
+
 # Conclusions
 
+
 # References
+
+>[1] José Martínez Heras. (28/05/2019). Máquinas de Vectores de Soporte (SVM). 23/12/2020, de iartificial.net Sitio web: https://www.iartificial.net/maquinas-de-vectores-de-soporte-svm/
+
+>
