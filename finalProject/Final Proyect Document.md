@@ -75,7 +75,11 @@ SVM can be of two types:
 
 <p align="justify" >
 In decision analysis, you can use a decision tree to visually and explicitly represent decisions and decision making. As its name implies, it uses a decision model in the form of a tree. Although it is a commonly used tool in data mining to derive a strategy to achieve a particular goal, it is also widely used in machine learning. [3]
+</p>
+<p align="justify" >
 It is a tree-structured classifier, where the internal nodes represent the characteristics of a data set, the branches represent the decision rules, and each leaf node represents the result. [4]
+</p>
+<p align="justify" >
 In a decision tree, there are two nodes, which are the decision node and the leaf node. Decision nodes are used to make any decision and have multiple branches, while leaf nodes are the result of those decisions and contain no more branches. Decisions or testing are made based on the characteristics of the given data set. [4]
 </p>
 
