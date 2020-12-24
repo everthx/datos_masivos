@@ -32,11 +32,14 @@
 # Index
 - [Introduction](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#introduction)
 - [Theoretical framework of algorithms](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#theoretical-framework-of-algorithms)
-- [Implementation]()
+- [Implementation](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#implementation)
   - [SVM]()
-- [Results]()
-- [Conclusions]()
-- [References]()
+  - [Decision Three]()
+  - [Logistic regression]()
+  - [Multilayer Perceptron]()
+- [Results](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#results)
+- [Conclusions](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#conclusions)
+- [References](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#references)
 
 # Introduction
 
@@ -48,7 +51,7 @@ The implementation of these algorithms is explained, as well as the result that 
 
 # Theoretical framework of algorithms
 
-### SVM
+### SVM - Support Vector Machines
 
 <p align="justify" >
 The acronym SVM for its acronym in English (Support Vector Machines). They can be used for both regression and classification. Support vector machines are a machine learning technique that finds the best possible separation between classes. With two dimensions it is easy to understand what you are doing. Typically, machine learning problems have many dimensions. So instead of finding the optimal line, the SVM finds the hyperplane that maximizes the separation margin between classes. [1]
@@ -102,6 +105,7 @@ A decision tree is drawn upside down with its root at the top. In the image to t
 
 # Implementation
 
+## SVM - Support Vector Machines
 
 # Results
 
