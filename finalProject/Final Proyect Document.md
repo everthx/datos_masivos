@@ -99,9 +99,46 @@ A decision tree is drawn upside down with its root at the top. In the image to t
 
 ### Logistic regression
 
+<p align="justify" >
+Logistic regression is a predictive modeling algorithm that is used when the variable Y is categorical binary. That is, it can only take two values ​​such as 1 or 0. The goal is to determine a mathematical equation that can be used to predict the probability of event 1. Once the equation is established, it can be used to predict the Y when only the X are known. [5]
+</p>
+
+<p align="justify" >
+Logistic regression is used when the dependent variable (target) is categorical.
+For example:
+- To predict whether an email is spam (1) or (0)
+- Whether the tumor is malignant (1) or not (0) 
+</p>
+
+<p align="justify" >
+Let's consider a scenario in which we need to classify whether an email is spam or not. If we use linear regression for this problem, it is necessary to establish a threshold based on which classification can be performed. Let's say if the actual class is malignant, the predicted continuous value of 0.4, and the threshold value is 0.5, the data point will be classified as non-malignant, which can have serious consequences in real time.
+</p>
+
+<p align="justify" >
+From this example, it can be inferred that linear regression is not suitable for classification problems. Linear regression has no limits and this brings logistic regression to the picture. Its value goes strictly from 0 to 1. [6]
+</p>
+
+<div  align="center" >
+
+![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/logistica.PNG)
+
+</div>
 
 ### Multilayer Perceptron
 
+<p align="justify" >
+The multilayer perceptron (MLP) is a complement to the forward neural network. It consists of three types of layers: the input layer, the output layer, and the hidden layer, as shown in the figure. The input layer receives the input signal to be processed. The required task, such as prediction and classification, is performed by the output layer. An arbitrary number of hidden layers that are placed between the input and output layers are the true computational engine of MLP. Similar to a feed-forward network in an MLP, data flows in the forward direction from the input layer to the output layer. Neurons in the MLP are trained with the backpropagation learning algorithm. MLPs are designed to approximate any continuous function and can solve problems that are not linearly separable. The main use cases for MLP are pattern classification, recognition, prediction, and approximation. [7]
+</p>
+
+<div  align="center" >
+
+![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/multilpe.PNG)
+
+</div>
+
+<p align="justify" >
+Multilayer perceptrons are often applied to supervised learning problems: they train on a set of input-output pairs and learn to model the correlation (or dependencies) between those inputs and outputs. Training involves adjusting the parameters, or the weights and biases, of the model to minimize error. [8]
+</p>
 
 # Implementation
 
@@ -123,3 +160,10 @@ A decision tree is drawn upside down with its root at the top. In the image to t
 
 >[4] JavaTpoint. (2018). Algoritmo de clasificación de árboles de decisión. 23/12/2020, de JavaTpoint Sitio web: https://www.javatpoint.com/machine-learning-decision-tree-classification-algorithm
 
+>[5] Selva Prabhakaran.Regresión logística. 23/12/2020, de machine learning plus Sitio web: https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/
+
+>[6] Saishruthi Swaminathan. (15/05/2018). Regresión logística: descripción general detallada. 23/12/2020, de towards data science Sitio web: https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc
+
+>[7] S. Abirami , P. Chitra. (2020). Multilayer Perceptron. 27/12/2020, de sciencedirect Sitio web: https://www.sciencedirect.com/topics/computer-science/multilayer-perceptron
+
+>[8] Chris Nicholson. Una guía para principiantes sobre perceptrones multicapa (MLP). 27/12/2020, de pathmind Sitio web: https://wiki.pathmind.com/multilayer-perceptron
