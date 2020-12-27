@@ -103,6 +103,12 @@ A decision tree is drawn upside down with its root at the top. In the image to t
 Logistic regression is a predictive modeling algorithm that is used when the variable Y is categorical binary. That is, it can only take two values ​​such as 1 or 0. The goal is to determine a mathematical equation that can be used to predict the probability of event 1. Once the equation is established, it can be used to predict the Y when only the X are known. [5]
 </p>
 
+<div  align="center" >
+
+![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/logistic.PNG)
+
+</div>
+
 <p align="justify" >
 Logistic regression is used when the dependent variable (target) is categorical.
 </p>
@@ -120,12 +126,6 @@ Let's consider a scenario in which we need to classify whether an email is spam 
 <p align="justify" >
 From this example, it can be inferred that linear regression is not suitable for classification problems. Linear regression has no limits and this brings logistic regression to the picture. Its value goes strictly from 0 to 1. [6]
 </p>
-
-<div  align="center" >
-
-![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/logistica.PNG)
-
-</div>
 
 ### Multilayer Perceptron
 
