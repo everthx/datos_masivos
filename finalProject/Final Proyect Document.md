@@ -147,6 +147,13 @@ Multilayer perceptrons are often applied to supervised learning problems: they t
 
 ## SVM - Support Vector Machines
 
+## Decision Three
+
+## Logistic regression
+
+## Multilayer Perceptron
+
+
 # Results
 
 
