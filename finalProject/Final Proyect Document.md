@@ -105,10 +105,13 @@ Logistic regression is a predictive modeling algorithm that is used when the var
 
 <p align="justify" >
 Logistic regression is used when the dependent variable (target) is categorical.
+</p>
+
 For example:
+
 - To predict whether an email is spam (1) or (0)
 - Whether the tumor is malignant (1) or not (0) 
-</p>
+
 
 <p align="justify" >
 Let's consider a scenario in which we need to classify whether an email is spam or not. If we use linear regression for this problem, it is necessary to establish a threshold based on which classification can be performed. Let's say if the actual class is malignant, the predicted continuous value of 0.4, and the threshold value is 0.5, the data point will be classified as non-malignant, which can have serious consequences in real time.
