@@ -33,10 +33,10 @@
 - [Introduction](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#introduction)
 - [Theoretical framework of algorithms](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#theoretical-framework-of-algorithms)
 - [Implementation](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#implementation)
-  - [SVM]()
-  - [Decision Three]()
-  - [Logistic regression]()
-  - [Multilayer Perceptron]()
+  - [SVM](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#svm---support-vector-machines-1)
+  - [Decision Three](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#decision-three-1)
+  - [Logistic regression](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#logistic-regression-1)
+  - [Multilayer Perceptron](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#multilayer-perceptron-1)
 - [Results](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#results)
 - [Conclusions](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#conclusions)
 - [References](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#references)
@@ -144,6 +144,22 @@ Multilayer perceptrons are often applied to supervised learning problems: they t
 </p>
 
 # Implementation
+
+### Tool to be used
+
+<p align="justify" >
+For the implementation of the algorithms presented above, the Apache Spark language will be used, which is a computing system that is based on Hadoop Map Reduce and that, mainly, allows to divide or parallelize the work, since it is usually installed in a cluster of machine.
+</p>
+
+<p align="justify" >
+It also allows working on disk. In this way, if, for example, we have a very large file or a quantity of information that does not fit in memory, the tool allows us to store part of it on disk, which slows down. This means that we have to try to find the balance between what is stored in memory and what is stored on disk, to have a good speed and so that the cost is not too high, since memory is always much more expensive than memory. disk. Furthermore, Spark is multilanguage so it can be programmed in Scala, Python, Java or R. [9]
+</p>
+
+<p align="justify" >
+So we implemented Spark with Scala, which is a modern multi-paradigm programming language designed to express common programming patterns in a concise, elegant, and securely typed way. It easily integrates features of functional and object-oriented languages. [10]
+</p>
+
+### Justification of the tool selection
 
 ## SVM - Support Vector Machines
 
