@@ -161,6 +161,14 @@ So we implemented Spark with Scala, which is a modern multi-paradigm programming
 
 ### Justification of the tool selection
 
+<p align="justify" >
+The reason why Spark is chosen with Scala is because it is a programming language with a journey since it has been in the market for two decades. In addition, Scalable language (Scala), is a hybrid language between object-oriented programming and functional programming. Therefore, having the advantages of one and the other, it is a quite functional and practical language. [11]
+</p>
+
+<p align="justify" >
+It has less code to perform some functions compared to other languages. This is useful because you can reduce the code to the minimum expression and thus read it faster to correct possible problems [11]. Since this final project is to compare the performance algorithms of Machine Learning, this also offers access to modules and libraries that cover for Machine Learning.
+</p>
+
 ## SVM - Support Vector Machines
 
 ## Decision Three
@@ -193,3 +201,9 @@ So we implemented Spark with Scala, which is a modern multi-paradigm programming
 >[7] S. Abirami , P. Chitra. (2020). Multilayer Perceptron. 27/12/2020, de sciencedirect Sitio web: https://www.sciencedirect.com/topics/computer-science/multilayer-perceptron
 
 >[8] Chris Nicholson. Una guía para principiantes sobre perceptrones multicapa (MLP). 27/12/2020, de pathmind Sitio web: https://wiki.pathmind.com/multilayer-perceptron
+
+>[9] Abraham Requena Mesa. (2018). ¿Qué es Apache Spark?. 27/12/2020, de openwebinars Sitio web: https://openwebinars.net/blog/que-es-apache-spark/
+
+>[10] alvarag. TOUR OF SCALA. 27/12/2020, de docs.scala-lang Sitio web: https://docs.scala-lang.org/es/tour/tour-of-scala.html#:~:text=Scala%20es%20un%20lenguaje%20de,orientados%20a%20objetos%20y%20funcionales
+
+>[11] keep coding. ¿Cómo usar Spark con Scala para Big Data?  31/12/2020, de keepcoding Sitio web: https://keepcoding.io/blog/usar-spark-con-scala/ 
