@@ -1,4 +1,4 @@
-// Final Proyect
+// Final Proyect Unit 4
 
 //Made by
 //Hernández Negrete Salma Fabel - 16212354
@@ -29,6 +29,7 @@ val spark = SparkSession.builder().getOrCreate()
 
 //Our Dataset is loaded into a Dataframe
 val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
+
 dataframe.printSchema()
 //|-- age: integer (nullable = true)
 //|-- job: string (nullable = true)
@@ -52,7 +53,7 @@ dataframe.printSchema()
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val df = stringindexer.fit(dataframe).transform(dataframe)
 
-val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","pdays","previous")).setOutputCol("features")
+val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
 val output = assembler.transform(df)
 
 val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
@@ -62,12 +63,142 @@ val lsvcModel = lsvc.fit(output)
 
 // Imprimimos El Coeficiente De Intercepcion
 println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
-//Coefficients: [-2.125897501491213E-6,-0.013517727458849872,7.514021888017163E-4,2.7022337506408964E-4,0.011177544540215354] 
-//Intercept: -1.084924165339881
+//Coefficients: [6.330591568036637E-6,0.0,2.808166581075016E-4,-0.028961566246757903,1.2076830519916415E-4,0.004777588414066137] 
+//Intercept: -1.1480593155519985
 
 //>>>>>>>>>>>>>>>>>Decision Three<<<<<<<<<<<<<<<<<<
 
+// Importing this libraries is required in order to get the example done.
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.classification.DecisionTreeClassificationModel
+import org.apache.spark.ml.classification.DecisionTreeClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.feature.{IndexToString, StringIndexer, VectorIndexer}
 
+//Minimize errors
+import org.apache.log4j._
+Logger.getLogger("org").setLevel(Level.ERROR)
+
+//Start a simple Spark Session
+import org.apache.spark.sql.SparkSession
+val spark = SparkSession.builder().getOrCreate()
+
+//Our Dataset is loaded into a Dataframe
+val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
+
+//
+val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
+val df = stringindexer.fit(dataframe).transform(dataframe)
+
+val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
+val output = assembler.transform(df)
+
+
+// Index labels, adding metadata to the label column.
+// Fit on whole dataset to include all labels in index.
+val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexedLabel").fit(output)
+
+// Automatically identify categorical features, and index them.
+val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4).fit(output)
+
+// Split the data into training and test sets (30% held out for testing).
+val Array(trainingData, testData) = output.randomSplit(Array(0.7, 0.3))
+
+// Train a DecisionTree model.
+val dt = new DecisionTreeClassifier().setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures")
+
+// Convert indexed labels back to original labels.
+val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels)
+
+// Chain indexers and tree in a Pipeline.
+val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, dt, labelConverter))
+
+// Train model. This also runs the indexers.
+val model = pipeline.fit(trainingData)
+
+// Make predictions.
+val predictions = model.transform(testData)
+
+// Select example rows to display.
+predictions.select("predictedLabel", "label", "features").show(5)
+
+//+--------------+-----+--------------------+
+//|predictedLabel|label|            features|
+//+--------------+-----+--------------------+
+//|           0.0|  1.0|[608.0,12.0,267.0...|
+//|           0.0|  1.0|[108.0,10.0,167.0...|
+//|           0.0|  1.0|[103.0,10.0,104.0...|
+//|           0.0|  0.0|[291.0,5.0,291.0,...|
+//|           0.0|  0.0|[626.0,15.0,117.0...|
+//+--------------+-----+--------------------+
+
+// Select (prediction, true label) and compute test error.
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
+
+val accuracy = evaluator.evaluate(predictions)
+println(s"Test Error = ${(1.0 - accuracy)}")
+//accuracy: Double = 0.8924755120213713
+//Test Error = 0.10752448797862868
+
+val treeModel = model.stages(2).asInstanceOf[DecisionTreeClassificationModel]
+println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
+//Learned classification tree model:
+//DecisionTreeClassificationModel (uid=dtc_afeb8d936788) of depth 5 with 37 nodes
+// If (feature 2 <= 486.5)
+//  If (feature 4 <= 9.5)
+//   If (feature 2 <= 204.5)
+//     Predict: 0.0
+//    Else (feature 2 > 204.5)
+//     If (feature 1 <= 1.5)
+//      If (feature 2 <= 290.5)
+//       Predict: 0.0
+//      Else (feature 2 > 290.5)
+//       Predict: 1.0
+//     Else (feature 1 > 1.5)
+//      Predict: 0.0
+//   Else (feature 4 > 9.5)
+//    If (feature 2 <= 178.5)
+//     Predict: 0.0
+//    Else (feature 2 > 178.5)
+//     If (feature 4 <= 188.5)
+//      If (feature 4 <= 95.5)
+//       Predict: 1.0
+//      Else (feature 4 > 95.5)
+//       Predict: 0.0
+//     Else (feature 4 > 188.5)
+//      If (feature 4 <= 498.0)
+//       Predict: 0.0
+//      Else (feature 4 > 498.0)
+//       Predict: 1.0
+//  Else (feature 2 > 486.5)
+//   If (feature 2 <= 684.5)
+//    If (feature 4 <= 8.5)
+//     Predict: 0.0
+//    Else (feature 4 > 8.5)
+//     If (feature 4 <= 188.5)
+//      Predict: 1.0
+//     Else (feature 4 > 188.5)
+//      If (feature 0 <= 4967.0)
+//       Predict: 0.0
+//      Else (feature 0 > 4967.0)
+//       Predict: 1.0
+//   Else (feature 2 > 684.5)
+//    If (feature 2 <= 884.5)
+//     If (feature 4 <= 3.0)
+//      If (feature 1 <= 29.5)
+//       Predict: 0.0
+//      Else (feature 1 > 29.5)
+//       Predict: 1.0
+//     Else (feature 4 > 3.0)
+//      Predict: 1.0
+//    Else (feature 2 > 884.5)
+//     If (feature 1 <= 29.5)
+//      If (feature 1 <= 3.5)
+//       Predict: 0.0
+//      Else (feature 1 > 3.5)
+//       Predict: 1.0
+//     Else (feature 1 > 29.5)
+//      Predict: 1.0
 
 
 //>>>>>>>>>>>>>>>>>Logistic regression<<<<<<<<<<<<<
