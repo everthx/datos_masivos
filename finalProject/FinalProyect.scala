@@ -11,7 +11,7 @@
 // - Multilayer Perceptron
 
 
-//>>>>>>>>>>>>>>>>>>>SVM<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>SVM<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 //import libraries
 import org.apache.spark.ml.classification.LinearSVC
@@ -66,7 +66,7 @@ println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.interce
 //Coefficients: [6.330591568036637E-6,0.0,2.808166581075016E-4,-0.028961566246757903,1.2076830519916415E-4,0.004777588414066137] 
 //Intercept: -1.1480593155519985
 
-//>>>>>>>>>>>>>>>>>Decision Three<<<<<<<<<<<<<<<<<<
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Decision Three<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // Importing this libraries is required in order to get the example done.
 import org.apache.spark.ml.Pipeline
@@ -74,6 +74,9 @@ import org.apache.spark.ml.classification.DecisionTreeClassificationModel
 import org.apache.spark.ml.classification.DecisionTreeClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.feature.{IndexToString, StringIndexer, VectorIndexer}
+import org.apache.spark.ml.feature.StringIndexer 
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.Vectors
 
 //Minimize errors
 import org.apache.log4j._
@@ -201,9 +204,52 @@ println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
 //      Predict: 1.0
 
 
-//>>>>>>>>>>>>>>>>>Logistic regression<<<<<<<<<<<<<
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Logistic regression<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// Importing this libraries is required in order to get the example done.
+import org.apache.spark.ml.classification.LogisticRegression
+import org.apache.spark.ml.feature.StringIndexer 
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.Vectors
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
+
+//Minimize errors
+import org.apache.log4j._
+Logger.getLogger("org").setLevel(Level.ERROR)
+
+//Start a simple Spark Session
+import org.apache.spark.sql.SparkSession
+val spark = SparkSession.builder().getOrCreate()
+
+//Our Dataset is loaded into a Dataframe
+val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
 
 
+//
+val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
+val output = stringindexer.fit(dataframe).transform(dataframe)
 
+val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
 
-//>>>>>>>>>>>>>>>>>Multilayer Perceptron<<<<<<<<<<<<
+val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
+
+val lr = new LogisticRegression()
+
+val pipeline = new Pipeline().setStages(Array(assembler, lr))
+
+val model = pipeline.fit(training)
+val results = model.transform(test)
+
+val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
+val metrics = new MulticlassMetrics(predictionAndLabels)
+
+println("Confusion matrix:")
+println(metrics.confusionMatrix)
+//11969.0  191.0  
+//1306.0   288.0
+
+ metrics.accuracy
+//res3: Double = 0.891158935582376
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Multilayer Perceptron<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
