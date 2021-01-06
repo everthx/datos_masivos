@@ -46,7 +46,7 @@
 
 <p align="justify" >
 This document specifies the analysis and development of the final project for unit 4 on the matter of big data, which the objective of this final project is to compare the performance of Machine Learning algorithms that were seenstudied during the semester, using  the Bank Marketing data set obtained from the following source:
-https://archive.ics.uci.edu/ml/datasets/Bank+Marketing
+[Dataset Source](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing)
 The implementation of these algorithms is explained, as well as the result that was reached, through a tabulation to better visualize the performance of each one of them.
 </p>
 
@@ -87,7 +87,6 @@ It is a tree-structured classifier, where the internal nodes represent the chara
 In a decision tree, there are two nodes, which are the decision node and the leaf node. Decision nodes are used to make any decision and have multiple branches, while leaf nodes are the result of those decisions and contain no more branches. Decisions or tests are made based on the characteristics of the given data set. [4]
 </p>
 
-
 <div  align="center" >
 
 ![ScreenShot](https://github.com/SalmaFabel/IMG/blob/main/three.PNG)
@@ -118,7 +117,6 @@ For example:
 
 - To predict whether an email is spam (1) or (0)
 - Whether the tumor is malignant (1) or not (0) 
-
 
 <p align="justify" >
 Let's consider a scenario in which we need to classify whether an email is spam or not. If we use linear regression for this problem, it is necessary to establish a threshold based on which classification can be performed. Let's say if the actual class is malignant, the predicted continuous value of 0.4, and the threshold value is 0.5, the data point will be classified as non-malignant, which can have serious consequences in real time.
@@ -160,7 +158,7 @@ It also allows working on disk. In this way, if, for example, we have a very lar
 So we implemented Spark with Scala, which is a modern multi-paradigm programming language designed to express common programming patterns in a concise, elegant, and securely typed way. It easily integrates features of functional and object-oriented languages. [10]
 </p>
 
-### Justification of the tool selection
+### Tool selection justification.
 
 <p align="justify" >
 The reason why Spark is chosen with Scala is because it is a programming language with a journey since it has been in the market for two decades. In addition, Scalable language (Scala), is a hybrid language between object-oriented programming and functional programming. Therefore, having the advantages of one and the other, it is a quite functional and practical language. [11]
@@ -178,8 +176,17 @@ It has less code to perform some functions compared to other languages. This is 
 
 ## Multilayer Perceptron
 
-
 # Results
+<p align="justify" >
+After comparing the results of each of the algorithms we decided to express that comparison based on Accuracy and Error percentages and give them a rank.
+</p>
+
+|      ML Algorithm     | Accuracy % | Test Error % | Rank by Accuracy |
+|:---------------------:|:----------:|:------------:|:----------------:|
+|          SVM          |   0.8449   |    0.1150    |         4        |
+|     Desicion Tree     |   0.8924   |    0.1075    |         1        |
+|  Logistic Regression  |   0.8911   |    0.1088    |         2        |
+| Multilayer Perceptron |   0.8829   |    0.1170    |         3        |
 
 
 # Conclusions
