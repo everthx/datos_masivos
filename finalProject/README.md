@@ -3,8 +3,8 @@
 <h3>Introduction</h3>
 
 <p align="justify" >
-This document specifies the analysis and development of the final project for unit 4 on the matter of big data, which the objective of this final project is to compare the performance of Machine Learning algorithms that were seenstudied during the semester, using  the Bank Marketing data set obtained from the following source:
-[Dataset Source](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing)
+This document specifies the analysis and development of the final project for unit 4 on the matter of big data, which the objective of this final project is to compare the performance of Machine Learning algorithms that were seenstudied during the semester, using  the Bank Marketing data set obtained from the following source: <br>
+https://archive.ics.uci.edu/ml/datasets/Bank+Marketing <br>
 The implementation of these algorithms is explained, as well as the result that was reached, through a tabulation to better visualize the performance of each one of them.
 </p>
 

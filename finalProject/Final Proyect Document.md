@@ -35,7 +35,7 @@
 - [Theoretical framework of algorithms](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#theoretical-framework-of-algorithms)
 - [Implementation](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#implementation)
   - [SVM](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#svm---support-vector-machines-1)
-  - [Decision Three](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#decision-three-1)
+  - [Decision Tree](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#decision-three-1)
   - [Logistic regression](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#logistic-regression-1)
   - [Multilayer Perceptron](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#multilayer-perceptron-1)
 - [Results](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#results)
@@ -45,8 +45,8 @@
 # Introduction
 
 <p align="justify" >
-This document specifies the analysis and development of the final project for unit 4 on the matter of big data, which the objective of this final project is to compare the performance of Machine Learning algorithms that were seenstudied during the semester, using  the Bank Marketing data set obtained from the following source:
-[Dataset Source](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing)
+This document specifies the analysis and development of the final project for unit 4 on the matter of big data, which the objective of this final project is to compare the performance of Machine Learning algorithms that were seenstudied during the semester, using  the Bank Marketing data set obtained from the following source:<br>
+https://archive.ics.uci.edu/ml/datasets/Bank+Marketing <br>
 The implementation of these algorithms is explained, as well as the result that was reached, through a tabulation to better visualize the performance of each one of them.
 </p>
 
@@ -75,7 +75,7 @@ There are two types of:
 - **Non-linear SVM:** A non-linear SVM is used for non-linear separated data, which means that if a data set cannot be classified by a straight line, then the data is called non-linear data and the classifier used is called non-linear linear SVM classifier. [2]
 </p>
 
-### Decision Three
+### Decision Tree
 
 <p align="justify" >
 In decision analysis, you can use a decision tree to visually and explicitly represent decisions and decision making. As its name implies, it uses a decision model in the form of a tree. Although it is a commonly used tool in data mining to derive a strategy to achieve a particular goal, it is also widely used in machine learning. [3]
@@ -129,7 +129,7 @@ From this example, it can be inferred that linear regression is not suitable for
 ### Multilayer Perceptron
 
 <p align="justify" >
-The Multilayer Perceptron (MLP) is a complement to the forward neural network. It consists of three types of layers: the input layer, the output layer, and the hidden layer, as shown in the figure. The input layer receives the input signal to be processed. The required task, such as prediction and classification, is performed by the output layer. An arbitrary number of hidden layers that are placed between the input and output layers are the true computational engine of MLP. Similar to a feed-forward network in an MLP, data flows in the forward direction from the input layer to the output layer. Neurons in the MLP are trained with the backpropagation learning algorithm. MLPs are designed to approximate any continuous function and can solve problems that are not linearly separable. The main use cases for MLP are pattern classification, recognition, prediction, and approximation. [7]
+The Multilayer Perceptron (MLP) is a complement to the forward neural network. It consists of Tree types of layers: the input layer, the output layer, and the hidden layer, as shown in the figure. The input layer receives the input signal to be processed. The required task, such as prediction and classification, is performed by the output layer. An arbitrary number of hidden layers that are placed between the input and output layers are the true computational engine of MLP. Similar to a feed-forward network in an MLP, data flows in the forward direction from the input layer to the output layer. Neurons in the MLP are trained with the backpropagation learning algorithm. MLPs are designed to approximate any continuous function and can solve problems that are not linearly separable. The main use cases for MLP are pattern classification, recognition, prediction, and approximation. [7]
 </p>
 
 <div  align="center" >
@@ -170,7 +170,7 @@ It has less code to perform some functions compared to other languages. This is 
 
 ## SVM - Support Vector Machines
 
-## Decision Three
+## Decision Tree
 
 ## Logistic regression
 
@@ -187,7 +187,6 @@ After comparing the results of each of the algorithms we decided to express that
 |     Desicion Tree     |   0.8924   |    0.1075    |         1        |
 |  Logistic Regression  |   0.8911   |    0.1088    |         2        |
 | Multilayer Perceptron |   0.8829   |    0.1170    |         3        |
-
 
 # Conclusions
 
