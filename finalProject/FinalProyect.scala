@@ -4,7 +4,7 @@
 //Hernández Negrete Salma Fabel - 16212354
 //Luna Fuentes Fernando - 16210975
 
-//Objective: Comparison of the performance following machine learning algorithms
+//Objective: Performance comparison on the following machine learning algorithms
 // - SVM
 // - Decision Three
 // - Logistic regression
@@ -15,10 +15,11 @@
 
 //import libraries
 import org.apache.spark.ml.classification.LinearSVC
+
 //Minimize errors
 import org.apache.log4j._
 Logger.getLogger("org").setLevel(Level.ERROR)
-//
+
 import org.apache.spark.ml.feature.StringIndexer 
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.linalg.Vectors
@@ -61,14 +62,14 @@ val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
 //Fit the model
 val lsvcModel = lsvc.fit(output)
 
-// Imprimimos El Coeficiente De Intercepcion
+// Print the Interception coeficient
 println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
 //Coefficients: [6.330591568036637E-6,0.0,2.808166581075016E-4,-0.028961566246757903,1.2076830519916415E-4,0.004777588414066137] 
 //Intercept: -1.1480593155519985
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Decision Three<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// Importing this libraries is required in order to get the example done.
+// Importing the libraries is required in order to get the example done.
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.classification.DecisionTreeClassificationModel
 import org.apache.spark.ml.classification.DecisionTreeClassifier
@@ -89,7 +90,7 @@ val spark = SparkSession.builder().getOrCreate()
 //Our Dataset is loaded into a Dataframe
 val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
 
-//
+//Maps a string column as label indices
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val df = stringindexer.fit(dataframe).transform(dataframe)
 
@@ -206,7 +207,7 @@ println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Logistic regression<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// Importing this libraries is required in order to get the example done.
+// Importing the libraries is required in order to get the example done.
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.ml.feature.StringIndexer 
 import org.apache.spark.ml.feature.VectorAssembler
@@ -225,13 +226,13 @@ val spark = SparkSession.builder().getOrCreate()
 //Our Dataset is loaded into a Dataframe
 val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
 
-
-//
+//Maps a string column as label indices
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val output = stringindexer.fit(dataframe).transform(dataframe)
 
 val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
 
+//Split the data into 70% for training and 30% for tests
 val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
 
 val lr = new LogisticRegression()
@@ -271,7 +272,7 @@ val spark = SparkSession.builder().getOrCreate()
 //Our Dataset is loaded into a Dataframe
 val df= spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
 
-//
+//Maps a string column as label indices
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val df = stringindexer.fit(dataframe).transform(dataframe)
 
@@ -279,6 +280,7 @@ val assembler = new VectorAssembler().setInputCols(Array("balance","day","durati
 
 val output = assembler.transform(df).select($"label", $"features")
 
+//Split the data into 60% for training and 40% for tests
 val split = output.randomSplit(Array(0.6, 0.4), seed = 1234L)
 val train = splits(0)
 val test = splits(1)
