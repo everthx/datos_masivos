@@ -23,6 +23,8 @@ Logger.getLogger("org").setLevel(Level.ERROR)
 import org.apache.spark.ml.feature.StringIndexer 
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.linalg.Vectors
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
 
 //Start a simple Spark Session
 import org.apache.spark.sql.SparkSession
@@ -50,22 +52,40 @@ dataframe.printSchema()
 //|-- poutcome: string (nullable = true)
 //|-- y: string (nullable = true)
 
-//
+//Transform categorical data to numeric
+//StringIndexer encodes a string column of labels to a column of label indices.
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val df = stringindexer.fit(dataframe).transform(dataframe)
 
+//Let the assembler object converts the input values ​​to a vector. 
+//Use the VectorAssembler object to convert the input columns of the df to a single 
+//output column of an array called "features", set the input columns from where we are supposed to 
+//read the values.
 val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
-val output = assembler.transform(df)
+val output = assembler.transform(df).select($"label", $"features")
+
+////Separates the characteristics into 70% training and 30% testing
+val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
 
 val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
 
 //Fit the model
-val lsvcModel = lsvc.fit(output)
+val lsvcModel = lsvc.fit(training)
+
+val results = lsvcModel.transform(test)
+
+val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
+val metrics = new MulticlassMetrics(predictionAndLabels)
 
 // Print the Interception coeficient
 println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
-//Coefficients: [6.330591568036637E-6,0.0,2.808166581075016E-4,-0.028961566246757903,1.2076830519916415E-4,0.004777588414066137] 
-//Intercept: -1.1480593155519985
+//Coefficients: [4.339356943245717E-6,-0.004343870375279081,5.765546723075568E-4,-0.07211029685388683,2.5540225773264664E-4,0.007528323053442825] 
+//Intercept: -1.07258737561311
+
+println("Accurancy: " + metrics.accuracy) 
+println(s"Test Error = ${(1.0 - metrics.accuracy)}")
+//Accurancy: 0.8849789152246619
+//Test Error = 0.11502108477533812
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Decision Three<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -90,10 +110,15 @@ val spark = SparkSession.builder().getOrCreate()
 //Our Dataset is loaded into a Dataframe
 val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
 
-//Maps a string column as label indices
+//Transform categorical data to numeric
+//StringIndexer encodes a string column of labels to a column of label indices.
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val df = stringindexer.fit(dataframe).transform(dataframe)
 
+//Let the assembler object converts the input values ​​to a vector. 
+//Use the VectorAssembler object to convert the input columns of the df to a single 
+//output column of an array called "features", set the input columns from where we are supposed to 
+//read the values.
 val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
 val output = assembler.transform(df)
 
@@ -105,7 +130,7 @@ val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexe
 // Automatically identify categorical features, and index them.
 val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4).fit(output)
 
-// Split the data into training and test sets (30% held out for testing).
+//Separates the characteristics into 70% training and 30% testing
 val Array(trainingData, testData) = output.randomSplit(Array(0.7, 0.3))
 
 // Train a DecisionTree model.
@@ -144,6 +169,7 @@ println(s"Test Error = ${(1.0 - accuracy)}")
 //accuracy: Double = 0.8924755120213713
 //Test Error = 0.10752448797862868
 
+// Show by stages the classification of the tree model
 val treeModel = model.stages(2).asInstanceOf[DecisionTreeClassificationModel]
 println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
 //Learned classification tree model:
@@ -207,7 +233,7 @@ println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Logistic regression<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// Importing the libraries is required in order to get the example done.
+//import libraries
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.ml.feature.StringIndexer 
 import org.apache.spark.ml.feature.VectorAssembler
@@ -226,35 +252,46 @@ val spark = SparkSession.builder().getOrCreate()
 //Our Dataset is loaded into a Dataframe
 val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
 
-//Maps a string column as label indices
+//Transform categorical data to numeric
+//StringIndexer encodes a string column of labels to a column of label indices.
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val output = stringindexer.fit(dataframe).transform(dataframe)
 
+//Let the assembler object converts the input values ​​to a vector. 
 val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
 
-//Split the data into 70% for training and 30% for tests
+//Separates the characteristics into 70% training and 30% testing
 val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
 
+// Fit the model
 val lr = new LogisticRegression()
 
+// Create a new pipeline object with the following elements: assembler, lr.
 val pipeline = new Pipeline().setStages(Array(assembler, lr))
 
+// Adjust (fit) the pipeline for the training set.
 val model = pipeline.fit(training)
 val results = model.transform(test)
 
+// Convert the test results (test) on RDD using .as and .rdd
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
 
+// Print the Confusion matrix
 println("Confusion matrix:")
 println(metrics.confusionMatrix)
+//Confusion matrix:
 //11969.0  191.0  
 //1306.0   288.0
 
- metrics.accuracy
-//res3: Double = 0.891158935582376
+println("Accurancy: " + metrics.accuracy) 
+println(s"Test Error = ${(1.0 - metrics.accuracy)}")
+//Accurancy: 0.891158935582376
+//Test Error = 0.10884106441762398
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Multilayer Perceptron<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+//import libraries
 import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.feature.StringIndexer 
@@ -270,57 +307,40 @@ import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder().getOrCreate()
 
 //Our Dataset is loaded into a Dataframe
-val df= spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
+val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
 
-//Maps a string column as label indices
+//Transform categorical data to numeric
+//StringIndexer encodes a string column of labels to a column of label indices.
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val df = stringindexer.fit(dataframe).transform(dataframe)
 
-val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","pdays","previous")).setOutputCol("features")
+//Let the assembler object converts the input values ​​to a vector. 
+val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
+val output = assembler.transform(df)
 
-val output = assembler.transform(df).select($"label", $"features")
+//Split the data into 70% for training and 30% for tests
+val split = output.randomSplit(Array(0.7, 0.3), seed = 1234L)
+val train = split(0)
+val test = split(1)
 
-//Split the data into 60% for training and 40% for tests
-val split = output.randomSplit(Array(0.6, 0.4), seed = 1234L)
-val train = splits(0)
-val test = splits(1)
-
-val layers = Array[Int](5, 4, 1, 2)
+// specify layers for the neural network:
+// input layer of size 6 (features), two intermediate of size 4 and 1
+// and output of size 2 (classes)
+val layers = Array[Int](6, 4, 1, 2)
 output.show()
 
+// create the trainer and set its parameters
 val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
 
+// train the model
 val model = trainer.fit(train)
 
+// compute accuracy on the test set
 val result = model.transform(test)
-
 val predictionAndLabels = result.select("prediction", "label")
-predictionAndLabels.show
-//+----------+-----+
-//|prediction|label|
-//+----------+-----+
-//|       0.0|  1.0|
-//|       0.0|  0.0|
-//|       0.0|  1.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  1.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//|       0.0|  0.0|
-//+----------+-----+
 val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
 
 println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
-//Test set accuracy = 0.8829233550649208
+println(s"Test Error = ${(1.0 - metrics.accuracy)}")
+//Test set accuracy = 0.8827505142521305
+//Test Error = 0.10884106441762398
