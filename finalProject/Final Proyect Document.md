@@ -84,7 +84,7 @@ In decision analysis, you can use a decision tree to visually and explicitly rep
 It is a tree-structured classifier, where the internal nodes represent the characteristics of a data set, the branches represent the decision rules, and each leaf node represents the result. [4]
 </p>
 <p align="justify" >
-In a decision tree, there are two nodes, which are the decision node and the leaf node. Decision nodes are used to make any decision and have multiple branches, while leaf nodes are the result of those decisions and contain no more branches. Decisions or testing are made based on the characteristics of the given data set. [4]
+In a decision tree, there are two nodes, which are the decision node and the leaf node. Decision nodes are used to make any decision and have multiple branches, while leaf nodes are the result of those decisions and contain no more branches. Decisions or tests are made based on the characteristics of the given data set. [4]
 </p>
 
 
@@ -101,7 +101,7 @@ A decision tree is drawn upside down with its root at the top. In the image to t
 ### Logistic regression
 
 <p align="justify" >
-Logistic regression is a predictive modeling algorithm that is used when the variable Y is categorical binary. That is, it can only take two values ​​such as 1 or 0. The goal is to determine a mathematical equation that can be used to predict the probability of event 1. Once the equation is established, it can be used to predict the Y when only the X are known. [5]
+Logistic regression is a predictive modeling algorithm that is used when the variable Y is binarily categorical. That is, it can only take two values ​​such as 1 or 0. The goal is to determine a mathematical equation that can be used to predict the probability of event 1. Once the equation is established, it can be used to predict the Y when only X is known. [5]
 </p>
 
 <div  align="center" >
@@ -131,7 +131,7 @@ From this example, it can be inferred that linear regression is not suitable for
 ### Multilayer Perceptron
 
 <p align="justify" >
-The multilayer perceptron (MLP) is a complement to the forward neural network. It consists of three types of layers: the input layer, the output layer, and the hidden layer, as shown in the figure. The input layer receives the input signal to be processed. The required task, such as prediction and classification, is performed by the output layer. An arbitrary number of hidden layers that are placed between the input and output layers are the true computational engine of MLP. Similar to a feed-forward network in an MLP, data flows in the forward direction from the input layer to the output layer. Neurons in the MLP are trained with the backpropagation learning algorithm. MLPs are designed to approximate any continuous function and can solve problems that are not linearly separable. The main use cases for MLP are pattern classification, recognition, prediction, and approximation. [7]
+The Multilayer Perceptron (MLP) is a complement to the forward neural network. It consists of three types of layers: the input layer, the output layer, and the hidden layer, as shown in the figure. The input layer receives the input signal to be processed. The required task, such as prediction and classification, is performed by the output layer. An arbitrary number of hidden layers that are placed between the input and output layers are the true computational engine of MLP. Similar to a feed-forward network in an MLP, data flows in the forward direction from the input layer to the output layer. Neurons in the MLP are trained with the backpropagation learning algorithm. MLPs are designed to approximate any continuous function and can solve problems that are not linearly separable. The main use cases for MLP are pattern classification, recognition, prediction, and approximation. [7]
 </p>
 
 <div  align="center" >
@@ -149,11 +149,11 @@ Multilayer perceptrons are often applied to supervised learning problems: they t
 ### Tool to be used
 
 <p align="justify" >
-For the implementation of the algorithms presented above, the Apache Spark language will be used, which is a computing system that is based on Hadoop Map Reduce and that, mainly, allows to divide or parallelize the work, since it is usually installed in a cluster of machine.
+For the implementation of the algorithms presented above, the Apache Spark framework will be used, which is a computing system that is based on Hadoop Map Reduce and that, mainly, allows us to divide or parallelize the work, since it is usually installed in a machine cluster.
 </p>
 
 <p align="justify" >
-It also allows working on disk. In this way, if, for example, we have a very large file or a quantity of information that does not fit in memory, the tool allows us to store part of it on disk, which slows down. This means that we have to try to find the balance between what is stored in memory and what is stored on disk, to have a good speed and so that the cost is not too high, since memory is always much more expensive than memory. disk. Furthermore, Spark is multilanguage so it can be programmed in Scala, Python, Java or R. [9]
+It also allows working on disk. In this way, if, for example, we have a very large file or a large quantity of information that does not fit into memory, the tool allows us to store part of it on disk, which slows down. This means that we have to try to find the balance between what is stored in memory and what is stored on disk, to have a good speed and so that the cost is not too high, since memory is always much more expensive than disk memory. Furthermore, Spark is multilingual so it can be programmed in Scala, Python, Java or R. [9]
 </p>
 
 <p align="justify" >
@@ -167,7 +167,7 @@ The reason why Spark is chosen with Scala is because it is a programming languag
 </p>
 
 <p align="justify" >
-It has less code to perform some functions compared to other languages. This is useful because you can reduce the code to the minimum expression and thus read it faster to correct possible problems [11]. Since this final project is to compare the performance algorithms of Machine Learning, this also offers access to modules and libraries that cover for Machine Learning.
+It has less code to perform some functions compared to other languages. This is useful because you can reduce the code to the minimum expression and thus read it faster to correct possible problems [11]. Since this final project's goal is to compare the performance of several Machine Learning algorithms, this also offers access to modules and libraries that cover Machine Learning.
 </p>
 
 ## SVM - Support Vector Machines
