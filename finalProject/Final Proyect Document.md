@@ -369,11 +369,16 @@ val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabe
 ``` scala
 val accuracy = evaluator.evaluate(predictions)
 println(s"Test Error = ${(1.0 - accuracy)}")
+
+accuracy: Double = 0.8924755120213713
+Test Error = 0.10752448797862868
+
 ```
 
 ``` scala
 val treeModel = model.stages(2).asInstanceOf[DecisionTreeClassificationModel]
 println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
+//DecisionTreeClassificationModel (uid=dtc_afeb8d936788) of depth 5 with 37 nodes
 ```
 
 ## Logistic regression
@@ -466,6 +471,7 @@ val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy"
 ``` scala
 println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
 println(s"Test Error = ${(1.0 - metrics.accuracy)}")
+
 Test set accuracy = 0.8827505142521305
 Test Error = 0.10884106441762398
 ```
