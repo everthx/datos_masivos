@@ -260,38 +260,54 @@ output.show(5)
 
 ## SVM - Support Vector Machines
 
-<p align="justify" >
+The following libraries were used to carry out the SVM algorithm.
 
-</p>
+``` scala
+import org.apache.spark.ml.classification.LinearSVC
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
+```
+
+Then we have the test and training data, where he separates the data into 70 for training and 30 for testing.
 
 ``` scala
 val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
 val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
 ```
+We fit the model which will have the test and training data that were carried out previously.
 
 ```scala
 val lsvcModel = lsvc.fit(training)
 val results = lsvcModel.transform(test)
 ```
 
+We calculate the precision on the test equipment.
 
 ``` scala
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
 ```
+We print the intercept coefficient.
 
 ``` scala
 println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
-//Coefficients: [4.339356943245717E-6,-0.004343870375279081,5.765546723075568E-4,-0.07211029685388683,2.5540225773264664E-4,0.007528323053442825] 
-//Intercept: -1.07258737561311
+
+Coefficients: [4.339356943245717E-6,-0.004343870375279081,5.765546723075568E-4,-0.07211029685388683,2.5540225773264664E-4,0.007528323053442825] 
+Intercept: -1.07258737561311
 ```
+
+We print the accuracy and error test of the algorithm to compare at the end with the others.
 
 ```scala
 println("Accurancy: " + metrics.accuracy) 
 println(s"Test Error = ${(1.0 - metrics.accuracy)}")
+
+Accurancy: 0.8849789152246619
+Test Error = 0.11502108477533812
 ```
 
 ## Decision Tree
+
 
 ## Logistic regression
 
