@@ -168,7 +168,6 @@ The reason why Spark is chosen with Scala is because it is a programming languag
 It has less code to perform some functions compared to other languages. This is useful because you can reduce the code to the minimum expression and thus read it faster to correct possible problems [11]. Since this final project's goal is to compare the performance of several Machine Learning algorithms, this also offers access to modules and libraries that cover Machine Learning.
 </p>
 
-
 ### Preparation of our Dataframe
 
 <p align="justify" >
@@ -307,7 +306,6 @@ Test Error = 0.11502108477533812
 
 ## Decision Tree
 
-
 ``` scala
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.classification.DecisionTreeClassificationModel
@@ -389,16 +387,13 @@ import org.apache.spark.ml.Pipeline
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
 ```
 
-
 ``` scala
 val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
 ```
 
-
 ``` scala
 val lr = new LogisticRegression()
 ```
-
 
 ``` scala
 val pipeline = new Pipeline().setStages(Array(assembler, lr))
@@ -410,13 +405,10 @@ val model = pipeline.fit(training)
 val results = model.transform(test)
 ```
 
-
-
 ``` scala
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
 ```
-
 
 ``` scala
 println("Confusion matrix:")
@@ -447,7 +439,6 @@ val split = output.randomSplit(Array(0.7, 0.3), seed = 1234L)
 val train = split(0)
 val test = split(1)
 ```
-
 
 ``` scala
 val layers = Array[Int](6, 4, 1, 2)
@@ -493,7 +484,13 @@ After comparing the results of each of the algorithms we decided to express that
 </div>
 
 # Conclusions
+<p align="justify" >
+In the last century, we have accomplished several great discoveries and inventions that have revolutionized how we communicate and interact with both the world and each other. Just in recent decades, the rise of data and information has pressured society to come up with new ways of getting access and understanding the vast amounts of information it is derived from day-to-day activities in the modern world.
 
+The ability to connect to anyone from anywhere in the world generates a lot of user interactions, these interactions generate data that can be intercepted, collected, and analyzed. To extract information from raw data we turn to Machine Learning Algorithms. Machine Learning Algorithms specialize in processing data and extracting information, but not only doing this, but they also develop different ways of accomplishing this, specific methods that are tuned to a wide range of necessities.
+
+The algorithms we revised in this document represent the work and study of a whole semester. This study has offered us a deep understanding of how to work with large sets of data to obtain the information we are looking for and in the process offered us more tools to use if we ever want to follow the steps of a data scientist and how efficient is one algorithm to the other one.
+</p>
 
 # References
 
