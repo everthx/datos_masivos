@@ -177,36 +177,36 @@ To begin, you need to know our dataset with which we are going to work called �
 
 To start we need to accommodate our data frame and for this the following libraries were used.
 
-`` scala
+```scala
 import org.apache.spark.ml.feature.StringIndexer 
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.linalg.Vectors
-``
+```
 
 The following lines of code were used to minimize errors.
 
-`` scala
+```scala
 import org.apache.log4j._
 Logger.getLogger("org").setLevel(Level.ERROR)
-``
+```
 
 We start a simple session on spark and its instance.
 
-`` scala
+``` scala
 import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder().getOrCreate()
-``
+```
 
 <p align="justify" >
 Then the dataset "bank-full.csv" was loaded, which is our data frame, if you have a header with column names in the file, you must explicitly specify the "true" header option "option (" header ", true ) ”Not to mention this, the API treats the header as a data record. Next we have“ inferschema ”from the header record and derive the column type based on the data. Then we tell it that our data is delimited with“; the csv data.
 </p>
 
-`` scala
+``` scala
 val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
-``
+```
 Once it was loaded, we showed the schematic of the dataframe.
 
-`` scala
+``` scala
 dataframe.printSchema()
 //|-- age: integer (nullable = true)
 //|-- job: string (nullable = true)
@@ -225,7 +225,7 @@ dataframe.printSchema()
 //|-- previous: integer (nullable = true)
 //|-- poutcome: string (nullable = true)
 //|-- y: string (nullable = true)
-``
+```
 
 <p align="justify" >
 Once we understand how our dataframe is made up, it is known that the column of "y" is an output variable and is binary of "yes" or "no" so it becomes our label.
@@ -235,18 +235,18 @@ Once we understand how our dataframe is made up, it is known that the column of 
 We use StringIndexer () which encodes a column of tag strings into a column of tag indexes. By default, this is sorted by tag frequencies, so the most frequent tag gets index 0.
 </p>
 
-`` scala
+``` scala
 val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
 val df = stringindexer.fit(dataframe).transform(dataframe)
-``
+```
 <p align="justify" >
 The assembler object converts the input values ​​to a vector. VectorAssembler is used to convert the input columns of the df to a single output column of an array called "features". The columns that are integer "balance", "day", "duration", "campaign", "pdays", "previous" are taken, the old one was discarded since it is not necessary.
 </p>
 
-`` scala
+```scala
 val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
 val output = assembler.transform(df)
-``
+```
 
 ## SVM - Support Vector Machines
 
@@ -254,32 +254,32 @@ val output = assembler.transform(df)
 
 </p>
 
-`` scala
+``` scala
 val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
 val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
-``
+```
 
-`` scala
+```scala
 val lsvcModel = lsvc.fit(training)
 val results = lsvcModel.transform(test)
-``
+```
 
 
-`` scala
+``` scala
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
-``
+```
 
-`` scala
+``` scala
 println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
 //Coefficients: [4.339356943245717E-6,-0.004343870375279081,5.765546723075568E-4,-0.07211029685388683,2.5540225773264664E-4,0.007528323053442825] 
 //Intercept: -1.07258737561311
-``
+```
 
-`` scala
+```scala
 println("Accurancy: " + metrics.accuracy) 
 println(s"Test Error = ${(1.0 - metrics.accuracy)}")
-``
+```
 
 ## Decision Tree
 
