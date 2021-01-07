@@ -168,7 +168,118 @@ The reason why Spark is chosen with Scala is because it is a programming languag
 It has less code to perform some functions compared to other languages. This is useful because you can reduce the code to the minimum expression and thus read it faster to correct possible problems [11]. Since this final project's goal is to compare the performance of several Machine Learning algorithms, this also offers access to modules and libraries that cover Machine Learning.
 </p>
 
+
+### Preparation of our Dataframe
+
+<p align="justify" >
+To begin, you need to know our dataset with which we are going to work called “bank-full.csv”, which contains data related to direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls.
+</p>
+
+To start we need to accommodate our data frame and for this the following libraries were used.
+
+`` scala
+import org.apache.spark.ml.feature.StringIndexer 
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.Vectors
+``
+
+The following lines of code were used to minimize errors.
+
+`` scala
+import org.apache.log4j._
+Logger.getLogger("org").setLevel(Level.ERROR)
+``
+
+We start a simple session on spark and its instance.
+
+`` scala
+import org.apache.spark.sql.SparkSession
+val spark = SparkSession.builder().getOrCreate()
+``
+
+<p align="justify" >
+Then the dataset "bank-full.csv" was loaded, which is our data frame, if you have a header with column names in the file, you must explicitly specify the "true" header option "option (" header ", true ) ”Not to mention this, the API treats the header as a data record. Next we have“ inferschema ”from the header record and derive the column type based on the data. Then we tell it that our data is delimited with“; the csv data.
+</p>
+
+`` scala
+val dataframe = spark.read.option("header","true").option("inferSchema","true").option("delimiter",";").format("csv").load("bank-full.csv")
+``
+Once it was loaded, we showed the schematic of the dataframe.
+
+`` scala
+dataframe.printSchema()
+//|-- age: integer (nullable = true)
+//|-- job: string (nullable = true)
+//|-- marital: string (nullable = true)
+//|-- education: string (nullable = true)
+//|-- default: string (nullable = true)
+//|-- balance: integer (nullable = true)
+//|-- housing: string (nullable = true)
+//|-- loan: string (nullable = true)
+//|-- contact: string (nullable = true)
+//|-- day: integer (nullable = true)
+//|-- month: string (nullable = true)
+//|-- duration: integer (nullable = true)
+//|-- campaign: integer (nullable = true)
+//|-- pdays: integer (nullable = true)
+//|-- previous: integer (nullable = true)
+//|-- poutcome: string (nullable = true)
+//|-- y: string (nullable = true)
+``
+
+<p align="justify" >
+Once we understand how our dataframe is made up, it is known that the column of "y" is an output variable and is binary of "yes" or "no" so it becomes our label.
+</p>
+
+<p align="justify" >
+We use StringIndexer () which encodes a column of tag strings into a column of tag indexes. By default, this is sorted by tag frequencies, so the most frequent tag gets index 0.
+</p>
+
+`` scala
+val stringindexer = new StringIndexer().setInputCol("y").setOutputCol("label")
+val df = stringindexer.fit(dataframe).transform(dataframe)
+``
+<p align="justify" >
+The assembler object converts the input values ​​to a vector. VectorAssembler is used to convert the input columns of the df to a single output column of an array called "features". The columns that are integer "balance", "day", "duration", "campaign", "pdays", "previous" are taken, the old one was discarded since it is not necessary.
+</p>
+
+`` scala
+val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
+val output = assembler.transform(df)
+``
+
 ## SVM - Support Vector Machines
+
+<p align="justify" >
+
+</p>
+
+`` scala
+val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
+val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
+``
+
+`` scala
+val lsvcModel = lsvc.fit(training)
+val results = lsvcModel.transform(test)
+``
+
+
+`` scala
+val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
+val metrics = new MulticlassMetrics(predictionAndLabels)
+``
+
+`` scala
+println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
+//Coefficients: [4.339356943245717E-6,-0.004343870375279081,5.765546723075568E-4,-0.07211029685388683,2.5540225773264664E-4,0.007528323053442825] 
+//Intercept: -1.07258737561311
+``
+
+`` scala
+println("Accurancy: " + metrics.accuracy) 
+println(s"Test Error = ${(1.0 - metrics.accuracy)}")
+``
 
 ## Decision Tree
 
@@ -181,12 +292,16 @@ It has less code to perform some functions compared to other languages. This is 
 After comparing the results of each of the algorithms we decided to express that comparison based on Accuracy and Error percentages and give them a rank.
 </p>
 
+<div  align="center" >
+
 |      ML Algorithm     | Accuracy % | Test Error % | Rank by Accuracy |
 |:---------------------:|:----------:|:------------:|:----------------:|
 |          SVM          |   0.8449   |    0.1150    |         4        |
 |     Desicion Tree     |   0.8924   |    0.1075    |         1        |
 |  Logistic Regression  |   0.8911   |    0.1088    |         2        |
 | Multilayer Perceptron |   0.8829   |    0.1170    |         3        |
+
+</div>
 
 # Conclusions
 
