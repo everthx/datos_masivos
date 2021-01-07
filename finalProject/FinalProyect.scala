@@ -64,6 +64,17 @@ val df = stringindexer.fit(dataframe).transform(dataframe)
 val assembler = new VectorAssembler().setInputCols(Array("balance","day","duration","campaign","pdays","previous")).setOutputCol("features")
 val output = assembler.transform(df).select($"label", $"features")
 
+output.show(5)
+//+-----+--------------------+
+//|label|            features|
+//+-----+--------------------+
+//|  0.0|[2143.0,5.0,261.0...|
+//|  0.0|[29.0,5.0,151.0,1...|
+//|  0.0|[2.0,5.0,76.0,1.0...|
+//|  0.0|[1506.0,5.0,92.0,...|
+//|  0.0|[1.0,5.0,198.0,1....|
+//+-----+--------------------+
+
 ////Separates the characteristics into 70% training and 30% testing
 val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
 
