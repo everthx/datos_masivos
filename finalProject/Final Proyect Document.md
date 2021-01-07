@@ -264,7 +264,6 @@ The following libraries were used to carry out the SVM algorithm.
 
 ``` scala
 import org.apache.spark.ml.classification.LinearSVC
-import org.apache.spark.ml.Pipeline
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
 ```
 
@@ -309,9 +308,167 @@ Test Error = 0.11502108477533812
 ## Decision Tree
 
 
+``` scala
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.classification.DecisionTreeClassificationModel
+import org.apache.spark.ml.classification.DecisionTreeClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+```
+
+``` scala
+val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexedLabel").fit(output)
+```
+
+``` scala
+val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4).fit(output)
+```
+
+``` scala
+val Array(trainingData, testData) = output.randomSplit(Array(0.7, 0.3))
+```
+
+``` scala
+val dt = new DecisionTreeClassifier().setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures")
+```
+
+
+``` scala
+val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels)
+```
+
+``` scala
+val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, dt, labelConverter))
+```
+
+``` scala
+val model = pipeline.fit(trainingData)
+```
+
+``` scala
+val predictions = model.transform(testData)
+```
+
+``` scala
+predictions.select("predictedLabel", "label", "features").show(5)
+
++--------------+-----+--------------------+
+|predictedLabel|label|            features|
++--------------+-----+--------------------+
+|           0.0|  1.0|[608.0,12.0,267.0...|
+|           0.0|  1.0|[108.0,10.0,167.0...|
+|           0.0|  1.0|[103.0,10.0,104.0...|
+|           0.0|  0.0|[291.0,5.0,291.0,...|
+|           0.0|  0.0|[626.0,15.0,117.0...|
++--------------+-----+--------------------+
+```
+
+``` scala
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
+```
+
+``` scala
+val accuracy = evaluator.evaluate(predictions)
+println(s"Test Error = ${(1.0 - accuracy)}")
+```
+
+``` scala
+val treeModel = model.stages(2).asInstanceOf[DecisionTreeClassificationModel]
+println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
+```
+
 ## Logistic regression
 
+``` scala
+import org.apache.spark.ml.classification.LogisticRegression
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
+```
+
+
+``` scala
+val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
+```
+
+
+``` scala
+val lr = new LogisticRegression()
+```
+
+
+``` scala
+val pipeline = new Pipeline().setStages(Array(assembler, lr))
+
+```
+
+``` scala
+val model = pipeline.fit(training)
+val results = model.transform(test)
+```
+
+
+
+``` scala
+val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
+val metrics = new MulticlassMetrics(predictionAndLabels)
+```
+
+
+``` scala
+println("Confusion matrix:")
+println(metrics.confusionMatrix)
+
+Confusion matrix:
+11969.0  191.0  
+1306.0   288.0
+```
+
+``` scala
+println("Accurancy: " + metrics.accuracy) 
+println(s"Test Error = ${(1.0 - metrics.accuracy)}")
+
+Accurancy: 0.891158935582376
+Test Error = 0.10884106441762398
+```
+
 ## Multilayer Perceptron
+
+``` scala
+import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+```
+
+``` scala
+val split = output.randomSplit(Array(0.7, 0.3), seed = 1234L)
+val train = split(0)
+val test = split(1)
+```
+
+
+``` scala
+val layers = Array[Int](6, 4, 1, 2)
+output.show()
+```
+
+``` scala
+val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
+```
+
+``` scala
+val model = trainer.fit(train)
+```
+
+``` scala
+val result = model.transform(test)
+val predictionAndLabels = result.select("prediction", "label")
+val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
+```
+
+``` scala
+println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
+println(s"Test Error = ${(1.0 - metrics.accuracy)}")
+Test set accuracy = 0.8827505142521305
+Test Error = 0.10884106441762398
+```
 
 # Results
 <p align="justify" >
