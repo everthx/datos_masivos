@@ -306,6 +306,8 @@ Test Error = 0.11502108477533812
 
 ## Decision Tree
 
+To carry out the Decision three algorithm, the following libraries were used.
+
 ``` scala
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.classification.DecisionTreeClassificationModel
@@ -313,38 +315,46 @@ import org.apache.spark.ml.classification.DecisionTreeClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 ```
 
-``` scala
-val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexedLabel").fit(output)
-```
+We will create a label Indexer and a feature Indexer variable and set that to our current data variable.
 
 ``` scala
+val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexedLabel").fit(output)
+
 val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4).fit(output)
 ```
+
+Then we have the test and training data, where you separate the data into 70 for training and 30 for testing, this step is done in all the other algorithms.
 
 ``` scala
 val Array(trainingData, testData) = output.randomSplit(Array(0.7, 0.3))
 ```
+Here we instantiate the decision tree classifier and set 2 specific columns to be our labelIndexer and indexedFeatures. Then we create an instance of IndexToString and set 2 tag names that will store our predictions.
 
 ``` scala
 val dt = new DecisionTreeClassifier().setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures")
-```
 
-
-``` scala
 val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels)
 ```
+
+Now we will create a Pipeline with all the information collected so far. The Pipeline will allow us to enter multiple estimates into a single stage matrix that we can use below.
 
 ``` scala
 val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, dt, labelConverter))
 ```
 
+Let's use that Pipeline with all of our information to train our model. We will store the result in a new variable called model.
+
 ``` scala
 val model = pipeline.fit(trainingData)
 ```
 
+So, we have trained our model with our training data, now it is time to make some predictions using our test data.
+
 ``` scala
 val predictions = model.transform(testData)
 ```
+
+Let's take a look at what the model predicted by selecting some of the columns and some rows to display.
 
 ``` scala
 predictions.select("predictedLabel", "label", "features").show(5)
@@ -359,12 +369,11 @@ predictions.select("predictedLabel", "label", "features").show(5)
 |           0.0|  0.0|[626.0,15.0,117.0...|
 +--------------+-----+--------------------+
 ```
+Let's see how accurate that prediction was. We will have to call the MulticlassClassificationEvaluator and then call the precision based on the predictions. Finally, we will show the percentage of error.
 
 ``` scala
 val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
-```
 
-``` scala
 val accuracy = evaluator.evaluate(predictions)
 println(s"Test Error = ${(1.0 - accuracy)}")
 
@@ -372,6 +381,8 @@ accuracy: Double = 0.8924755120213713
 Test Error = 0.10752448797862868
 
 ```
+
+The following lines will allow us to create a stage model instance for DecisionTreeClassificationModel and print the classification learned from the tree model.
 
 ``` scala
 val treeModel = model.stages(2).asInstanceOf[DecisionTreeClassificationModel]
