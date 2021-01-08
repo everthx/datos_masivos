@@ -35,7 +35,7 @@
 - [Theoretical framework of algorithms](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#theoretical-framework-of-algorithms)
 - [Implementation](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#implementation)
   - [SVM](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#svm---support-vector-machines-1)
-  - [Decision Tree](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#decision-three-1)
+  - [Decision Tree](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#decision-tree-1)
   - [Logistic regression](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#logistic-regression-1)
   - [Multilayer Perceptron](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#multilayer-perceptron-1)
 - [Results](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#results)
@@ -392,34 +392,44 @@ println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
 
 ## Logistic regression
 
+The following libraries were used to carry out the Decision three algorithm.
+
 ``` scala
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
 ```
+As in the previous algorithms, it separates the data into 70 for training and 30 for testing.
 
 ``` scala
 val Array(training, test) = output.randomSplit(Array(0.7, 0.3), seed = 12345)
 ```
 
+Fit our model.
+
 ``` scala
 val lr = new LogisticRegression()
 ```
+We create a new pipeline object with the following elements: assembler, lr.
 
 ``` scala
 val pipeline = new Pipeline().setStages(Array(assembler, lr))
 
 ```
 
+We adjusted the channeling of the training set.
+
 ``` scala
 val model = pipeline.fit(training)
 val results = model.transform(test)
 ```
+Convert test results to RDD using .as and .rdd
 
 ``` scala
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
 ```
+We print the confusion matrix
 
 ``` scala
 println("Confusion matrix:")
@@ -429,6 +439,7 @@ Confusion matrix:
 11969.0  191.0  
 1306.0   288.0
 ```
+We print the accuracy and error test of the algorithm to compare in the end with the others.
 
 ``` scala
 println("Accurancy: " + metrics.accuracy) 
@@ -440,10 +451,14 @@ Test Error = 0.10884106441762398
 
 ## Multilayer Perceptron
 
+To perform the Multilayer Perceptron algorithm, the following libraries were used.
+
 ``` scala
 import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 ```
+
+Let's divide the data in the same way as with the other algorithms in 70% for training and 30% for tests
 
 ``` scala
 val split = output.randomSplit(Array(0.7, 0.3), seed = 1234L)
@@ -451,24 +466,31 @@ val train = split(0)
 val test = split(1)
 ```
 
+Specify layers for the neural network: input layer of size 6 (features), two intermediate layers of size 4 and 1, and output of size 2 (classes)
+
 ``` scala
 val layers = Array[Int](6, 4, 1, 2)
 output.show()
 ```
+We create the coach and set its parameters
 
 ``` scala
 val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
 ```
+Train the model
 
 ``` scala
 val model = trainer.fit(train)
 ```
+Calculate accuracy on test equipment
 
 ``` scala
 val result = model.transform(test)
 val predictionAndLabels = result.select("prediction", "label")
 val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
 ```
+
+We print the accuracy and error test of the algorithm to compare in the end with the others.
 
 ``` scala
 println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
