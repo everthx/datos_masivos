@@ -19,3 +19,4 @@ The implementation of these algorithms is explained, as well as the result that 
 - [Final Proyect](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/FinalProyect.scala)
 - [Final Proyect Document](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#-final-project-document)
 - [Final Proyect Document (in Spanish .pdf)]()
+- [Video explaining the results obtained from the project]()
