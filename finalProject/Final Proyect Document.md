@@ -41,6 +41,7 @@
 - [Results](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#results)
 - [Conclusions](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#conclusions)
 - [References](https://github.com/everthx/datos_masivos/blob/finalProject/finalProject/Final%20Proyect%20Document.md#references)
+- [Video explaining the results obtained from the project]()
 
 # Introduction
 
@@ -501,6 +502,85 @@ Test Error = 0.10884106441762398
 ```
 
 # Results
+
+As a result obtained with the SVM algorithm, it shows us the values ​​of the coefficient of the hyperplane and the intercept.
+
+``` scala
+Coefficients: [4.339356943245717E-6,-0.004343870375279081,5.765546723075568E-4,-0.07211029685388683,2.5540225773264664E-4,0.007528323053442825] 
+Intercept: -1.07258737561311
+```
+
+The result obtained from the Decision Tree algorithm was a depth of 5 with 37 nodes.
+
+``` scala
+Learned classification tree model:
+DecisionTreeClassificationModel (uid=dtc_afeb8d936788) of depth 5 with 37 nodes
+If (feature 2 <= 486.5)
+ If (feature 4 <= 9.5)
+   If (feature 2 <= 204.5)
+     Predict: 0.0
+    Else (feature 2 > 204.5)
+     If (feature 1 <= 1.5)
+      If (feature 2 <= 290.5)
+      Predict: 0.0
+      Else (feature 2 > 290.5)
+       Predict: 1.0
+     Else (feature 1 > 1.5)
+      Predict: 0.0
+   Else (feature 4 > 9.5)
+    If (feature 2 <= 178.5)
+     Predict: 0.0
+    Else (feature 2 > 178.5)
+     If (feature 4 <= 188.5)
+      If (feature 4 <= 95.5)
+       Predict: 1.0
+      Else (feature 4 > 95.5)
+       Predict: 0.0
+     Else (feature 4 > 188.5)
+      If (feature 4 <= 498.0)
+       Predict: 0.0
+      Else (feature 4 > 498.0)
+       Predict: 1.0
+  Else (feature 2 > 486.5)
+   If (feature 2 <= 684.5)
+    If (feature 4 <= 8.5)
+     Predict: 0.0
+    Else (feature 4 > 8.5)
+     If (feature 4 <= 188.5)
+      Predict: 1.0
+     Else (feature 4 > 188.5)
+      If (feature 0 <= 4967.0)
+       Predict: 0.0
+      Else (feature 0 > 4967.0)
+       Predict: 1.0
+   Else (feature 2 > 684.5)
+    If (feature 2 <= 884.5)
+     If (feature 4 <= 3.0)
+      If (feature 1 <= 29.5)
+       Predict: 0.0
+      Else (feature 1 > 29.5)
+       Predict: 1.0
+    Else (feature 4 > 3.0)
+      Predict: 1.0
+    Else (feature 2 > 884.5)
+     If (feature 1 <= 29.5)
+      If (feature 1 <= 3.5)
+       Predict: 0.0
+      Else (feature 1 > 3.5)
+       Predict: 1.0
+     Else (feature 1 > 29.5)
+      Predict: 1.0
+```
+As a result of the Logistic Regression algorithm, we have the following confusion matrix. Where 11969.0 would be our actual negative values, 1306 would be the false negatives, 191.0 would be the false positives, and 288.0 would be the actual positives.
+
+``` scala
+Confusion matrix:
+11969.0  191.0  
+1306.0   288.0
+```
+
+El resultado de Multilayer Perceptron, con este algoritmo se tardó en dar respuesta ya que es un modelo neuronal, del cual se obtuvo un 0.88% de exactitud.
+
 <p align="justify" >
 After comparing the results of each of the algorithms we decided to express that comparison based on Accuracy and Error percentages and give them a rank.
 </p>
@@ -519,9 +599,13 @@ After comparing the results of each of the algorithms we decided to express that
 # Conclusions
 <p align="justify" >
 In the last century, we have accomplished several great discoveries and inventions that have revolutionized how we communicate and interact with both the world and each other. Just in recent decades, the rise of data and information has pressured society to come up with new ways of getting access and understanding the vast amounts of information it is derived from day-to-day activities in the modern world.
+</p>
 
+<p align="justify" >
 The ability to connect to anyone from anywhere in the world generates a lot of user interactions, these interactions generate data that can be intercepted, collected, and analyzed. To extract information from raw data we turn to Machine Learning Algorithms. Machine Learning Algorithms specialize in processing data and extracting information, but not only doing this, but they also develop different ways of accomplishing this, specific methods that are tuned to a wide range of necessities.
+</p>
 
+<p align="justify" >
 The algorithms we revised in this document represent the work and study of a whole semester. This study has offered us a deep understanding of how to work with large sets of data to obtain the information we are looking for and in the process offered us more tools to use if we ever want to follow the steps of a data scientist and how efficient is one algorithm to the other one.
 </p>
 
