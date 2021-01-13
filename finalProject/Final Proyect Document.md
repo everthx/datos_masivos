@@ -27,7 +27,7 @@
 <h4 align="center" >Professor : </h4>
 <h4 align="center" >Dr. Jose Christian Romero Hernandez</h4>
 <br>
-<h4 align="center" >Delivery date: January 2021</h4>
+<h4 align="center" >Delivery date: 2021 / January / 15 </h4>
 </html>
 
 # Index
